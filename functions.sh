@@ -40,7 +40,7 @@ function check_variables() {
   check_variable "SINGLE_USER_ITERATIONS"
   check_variable "GPFDIST_LOCATION"
   #00
-  check_variable "RUN_COMPILE_TPCDS"
+  check_variable "RUN_COMPILE_TPCH"
   #01
   check_variable "RUN_GEN_DATA"
   #02
