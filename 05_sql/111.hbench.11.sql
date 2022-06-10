@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654864327 as a seed to the RNG
+-- using 1654865366 as a seed to the RNG
 
 
 select
@@ -13,7 +13,7 @@ from
 where
 	ps_suppkey = s_suppkey
 	and s_nationkey = n_nationkey
-	and n_name = 'UNITED STATES'
+	and n_name = 'MOZAMBIQUE'
 group by
 	ps_partkey having
 		sum(ps_supplycost * ps_availqty) > (
@@ -26,7 +26,7 @@ group by
 			where
 				ps_suppkey = s_suppkey
 				and s_nationkey = n_nationkey
-				and n_name = 'UNITED STATES'
+				and n_name = 'MOZAMBIQUE'
 		)
 order by
 	value desc;

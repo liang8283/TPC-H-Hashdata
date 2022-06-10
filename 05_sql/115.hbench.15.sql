@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654864327 as a seed to the RNG
+-- using 1654865366 as a seed to the RNG
 
 create view revenue0 (supplier_no, total_revenue) as
 	select
@@ -9,8 +9,8 @@ create view revenue0 (supplier_no, total_revenue) as
 	from
 		lineitem
 	where
-		l_shipdate >= date '1997-08-01'
-		and l_shipdate < date '1997-08-01' + interval '3' month
+		l_shipdate >= date '1994-07-01'
+		and l_shipdate < date '1994-07-01' + interval '3' month
 	group by
 		l_suppkey;
 

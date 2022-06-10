@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654864327 as a seed to the RNG
+-- using 1654865366 as a seed to the RNG
 
 
 select
@@ -9,8 +9,8 @@ select
 from
 	orders
 where
-	o_orderdate >= date '1996-10-01'
-	and o_orderdate < date '1996-10-01' + interval '3' month
+	o_orderdate >= date '1994-08-01'
+	and o_orderdate < date '1994-08-01' + interval '3' month
 	and exists (
 		select
 			*

@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654864327 as a seed to the RNG
+-- using 1654865366 as a seed to the RNG
 
 
 select
@@ -20,7 +20,7 @@ where
 	and c_nationkey = s_nationkey
 	and s_nationkey = n_nationkey
 	and n_regionkey = r_regionkey
-	and r_name = 'ASIA'
+	and r_name = 'AFRICA'
 	and o_orderdate >= date '1993-01-01'
 	and o_orderdate < date '1993-01-01' + interval '1' year
 group by

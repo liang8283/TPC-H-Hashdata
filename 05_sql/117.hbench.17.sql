@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654864327 as a seed to the RNG
+-- using 1654865366 as a seed to the RNG
 
 
 select
@@ -10,8 +10,8 @@ from
 	part
 where
 	p_partkey = l_partkey
-	and p_brand = 'Brand#45'
-	and p_container = 'MED CASE'
+	and p_brand = 'Brand#42'
+	and p_container = 'WRAP BAG'
 	and l_quantity < (
 		select
 			0.2 * avg(l_quantity)

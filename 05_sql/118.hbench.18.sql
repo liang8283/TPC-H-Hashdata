@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654864327 as a seed to the RNG
+-- using 1654865366 as a seed to the RNG
 
 
 select
@@ -22,7 +22,7 @@ where
 			lineitem
 		group by
 			l_orderkey having
-				sum(l_quantity) > 315
+				sum(l_quantity) > 312
 	)
 	and c_custkey = o_custkey
 	and o_orderkey = l_orderkey

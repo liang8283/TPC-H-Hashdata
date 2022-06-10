@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654864327 as a seed to the RNG
+-- using 1654865366 as a seed to the RNG
 
 
 select
@@ -16,7 +16,7 @@ from
 			customer
 		where
 			substring(c_phone from 1 for 2) in
-				('27', '26', '30', '32', '15', '24', '29')
+				('26', '20', '34', '21', '10', '32', '33')
 			and c_acctbal > (
 				select
 					avg(c_acctbal)
@@ -25,7 +25,7 @@ from
 				where
 					c_acctbal > 0.00
 					and substring(c_phone from 1 for 2) in
-						('27', '26', '30', '32', '15', '24', '29')
+						('26', '20', '34', '21', '10', '32', '33')
 			)
 			and not exists (
 				select

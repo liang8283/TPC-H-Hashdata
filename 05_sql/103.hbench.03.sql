@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654864327 as a seed to the RNG
+-- using 1654865366 as a seed to the RNG
 
 
 select
@@ -13,11 +13,11 @@ from
 	orders,
 	lineitem
 where
-	c_mktsegment = 'MACHINERY'
+	c_mktsegment = 'FURNITURE'
 	and c_custkey = o_custkey
 	and l_orderkey = o_orderkey
-	and o_orderdate < date '1995-03-25'
-	and l_shipdate > date '1995-03-25'
+	and o_orderdate < date '1995-03-11'
+	and l_shipdate > date '1995-03-11'
 group by
 	l_orderkey,
 	o_orderdate,

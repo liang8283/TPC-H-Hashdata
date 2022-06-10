@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654864327 as a seed to the RNG
+-- using 1654865366 as a seed to the RNG
 
 
 select
@@ -17,7 +17,7 @@ select
 from
 	lineitem
 where
-	l_shipdate <= date '1998-12-01' - interval '75' day (3)
+	l_shipdate <= date '1998-12-01' - interval '116' day (3)
 group by
 	l_returnflag,
 	l_linestatus

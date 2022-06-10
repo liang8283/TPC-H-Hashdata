@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654864327 as a seed to the RNG
+-- using 1654865366 as a seed to the RNG
 
 
 select
@@ -13,9 +13,9 @@ from
 	part
 where
 	p_partkey = ps_partkey
-	and p_brand <> 'Brand#44'
-	and p_type not like 'PROMO ANODIZED%'
-	and p_size in (21, 9, 24, 36, 35, 41, 46, 10)
+	and p_brand <> 'Brand#14'
+	and p_type not like 'SMALL BURNISHED%'
+	and p_size in (43, 47, 50, 34, 22, 49, 23, 33)
 	and ps_suppkey not in (
 		select
 			s_suppkey
