@@ -38,7 +38,7 @@ if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
   #external tables are the same for all gpdb
   get_gpfdist_port
 
-  for i in $(ls ${PWD}/*.ext_tpcds.*.sql); do
+  for i in $(ls ${PWD}/*.ext_tpch.*.sql); do
     start_log
 
     id=$(echo ${i} | awk -F '.' '{print $1}')
@@ -77,9 +77,9 @@ fi
 
 DropRole="DROP ROLE IF EXISTS ${BENCH_ROLE}"
 CreateRole="CREATE ROLE ${BENCH_ROLE}"
-GrantSchemaPrivileges="GRANT ALL PRIVILEGES ON SCHEMA tpcds TO ${BENCH_ROLE}"
-GrantTablePrivileges="GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA tpcds TO ${BENCH_ROLE}"
-SetSearchPath="ALTER database gpadmin SET search_path=tpcds, \"\${user}\", public"
+GrantSchemaPrivileges="GRANT ALL PRIVILEGES ON SCHEMA tpch TO ${BENCH_ROLE}"
+GrantTablePrivileges="GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA tpch TO ${BENCH_ROLE}"
+SetSearchPath="ALTER database gpadmin SET search_path=tpch, \"\${user}\", public"
 
 start_log
 
