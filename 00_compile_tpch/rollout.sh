@@ -20,10 +20,10 @@ function make_tpc()
 
 function copy_tpc()
 {
-  cp ${PWD}/dbgen/qgen ../*_gen_data/
-  cp ${PWD}/dbgen/qgen ../*_multi_user/
-  cp ${PWD}/dbgen/dists.dss ../*_gen_data/
-  cp ${PWD}/dbgen/dists.dss ../*_multi_user/
+  cp ${PWD}/dbgen/qgen ../*_gen_data/queries/
+  cp ${PWD}/dbgen/qgen ../*_multi_user/queries/
+  cp ${PWD}/dbgen/dists.dss ../*_gen_data/queries/
+  cp ${PWD}/dbgen/dists.dss ../*_multi_user/queries/
 
   #copy the compiled dbgen program to the segment nodes
   echo "copy tpch binaries to segment hosts"
