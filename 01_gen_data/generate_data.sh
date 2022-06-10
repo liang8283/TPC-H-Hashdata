@@ -28,10 +28,12 @@ if [ "$PARALLEL" -eq "1" ]; then
 	SINGLE_SEGMENT="1"
 fi
 
+cp ${PWD}/dbgen ${PWD}/dists.dss ${DATA_DIRECTORY}
+
 cd ${PWD}
 cd $DATA_DIRECTORY
 # ${PWD}/dbgen -scale ${GEN_DATA_SCALE} -dir ${DATA_DIRECTORY} -parallel ${PARALLEL} -child ${CHILD} -terminate n
-$PWD/dbgen -s $GEN_DATA_SCALE -C $PARALLEL -S $CHILD -v
+${DATA_DIRECTORY}/dbgen -s $GEN_DATA_SCALE -C $PARALLEL -S $CHILD -v
 # make sure there is a file in each directory so that gpfdist doesn't throw an error
 cd ${PWD}
 declare -a tables=("call_center" "catalog_page" "catalog_returns" "catalog_sales" "customer" "customer_address" "customer_demographics" "date_dim" "household_demographics" "income_band" "inventory" "item" "promotion" "reason" "ship_mode" "store" "store_returns" "store_sales" "time_dim" "warehouse" "web_page" "web_returns" "web_sales" "web_site")
