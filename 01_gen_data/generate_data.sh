@@ -36,7 +36,7 @@ cd $DATA_DIRECTORY
 ${DATA_DIRECTORY}/dbgen -s $GEN_DATA_SCALE -C $PARALLEL -S $CHILD -v
 # make sure there is a file in each directory so that gpfdist doesn't throw an error
 cd ${PWD}
-declare -a tables=("call_center" "catalog_page" "catalog_returns" "catalog_sales" "customer" "customer_address" "customer_demographics" "date_dim" "household_demographics" "income_band" "inventory" "item" "promotion" "reason" "ship_mode" "store" "store_returns" "store_sales" "time_dim" "warehouse" "web_page" "web_returns" "web_sales" "web_site")
+declare -a tables=("supplier" "region" "part" "partsupp" "customer" "orders" "nation" "lineitem")
 
 for i in "${tables[@]}"; do
 	filename="${DATA_DIRECTORY}/${i}_${CHILD}_${PARALLEL}.dat"
