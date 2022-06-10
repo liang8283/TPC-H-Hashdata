@@ -39,7 +39,7 @@ cd ${PWD}
 declare -a tables=("supplier" "region" "part" "partsupp" "customer" "orders" "nation" "lineitem")
 
 for i in "${tables[@]}"; do
-	filename="${DATA_DIRECTORY}/${i}_${CHILD}_${PARALLEL}.dat"
+	filename="${DATA_DIRECTORY}/${i}.${CHILD}.${PARALLEL}.dat"
 	echo ${filename}
 	if [ ! -f ${filename} ]; then
 		touch ${filename}
@@ -58,7 +58,7 @@ if [ "$SINGLE_SEGMENT" -eq "1" ]; then
 	declare -a tables=("supplier" "region" "part" "partsupp" "customer" "orders" "nation" "lineitem")
 
 	for i in "${tables[@]}"; do
-		filename="${DATA_DIRECTORY}/${i}_${CHILD}_${PARALLEL}.dat"
+		filename="${DATA_DIRECTORY}/${i}.${CHILD}.${PARALLEL}.dat"
 		echo ${filename}
 		if [ ! -f ${filename} ]; then
 			touch ${filename}

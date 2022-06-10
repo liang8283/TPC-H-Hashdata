@@ -62,7 +62,7 @@ if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
       else
         LOCATION+="', '"
       fi
-      LOCATION+="gpfdist://${EXT_HOST}:${PORT}/${table_name}_[0-9]*_[0-9]*.dat"
+      LOCATION+="gpfdist://${EXT_HOST}:${PORT}/${table_name}.[0-9]*.[0-9]*.dat"
 
       counter=$((counter + 1))
     done
