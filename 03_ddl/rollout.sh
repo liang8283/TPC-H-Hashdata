@@ -79,8 +79,7 @@ DropRole="DROP ROLE IF EXISTS ${BENCH_ROLE}"
 CreateRole="CREATE ROLE ${BENCH_ROLE}"
 GrantSchemaPrivileges="GRANT ALL PRIVILEGES ON SCHEMA tpch TO ${BENCH_ROLE}"
 GrantTablePrivileges="GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA tpch TO ${BENCH_ROLE}"
-#SetSearchPath="ALTER database gpadmin SET search_path=tpch, \"\${user}\", public"
-SetSearchPath="ALTER database gpadmin SET search_path=tpch, public"
+SetSearchPath="ALTER database gpadmin SET search_path=tpch, \"\${user}\", public"
 
 start_log
 
