@@ -42,8 +42,8 @@ function copy_tpc()
 
 make_tpc
 create_hosts_file
-copy_tpc
 copy_queries
+copy_tpc
 print_log
 
 echo "Finished ${step}"
