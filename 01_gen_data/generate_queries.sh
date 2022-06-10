@@ -15,10 +15,9 @@ if [ "${GEN_DATA_SCALE}" == "" ] || [ "${BENCH_ROLE}" == "" ]; then
 	exit 1
 fi
 
-rm -f ${TPC_DS_DIR}/05_sql/*.${BENCH_ROLE}.*.sql*
-
 echo "rm -f $PWD/../05_sql/*.tpch.*.sql"
-rm -f $PWD/../05_sql/*.tpch.*.sql
+rm -f ${TPC_DS_DIR}/05_sql/*.${BENCH_ROLE}.*.sql*
+#rm -f $PWD/../05_sql/*.tpch.*.sql
 
 cd $PWD/queries
 
