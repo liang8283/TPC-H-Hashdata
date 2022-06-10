@@ -14,8 +14,8 @@ export RUN_COMPILE_TPCH="true"
 # change BENCH_ROLE and set RUN_GEN_DATA to true and GEN_NEW_DATA to false
 # GEN_NEW_DATA only takes affect when RUN_GEN_DATA is true, and the default setting
 # should true under normal circumstances
-export RUN_GEN_DATA="false"
-export GEN_NEW_DATA="false"
+export RUN_GEN_DATA="true"
+export GEN_NEW_DATA="true"
 
 export RUN_INIT="false"
 
@@ -23,11 +23,11 @@ export RUN_INIT="false"
 # change BENCH_ROLE and set RUN_DDL to true and DROP_EXISTING_TABLES to false
 # DROP_EXISTING_TABLES only takes affect when RUN_DDL is true, and the default setting
 # should true under normal circumstances
-export RUN_DDL="true"
-export DROP_EXISTING_TABLES="true"
+export RUN_DDL="false"
+export DROP_EXISTING_TABLES="false"
 
-export RUN_LOAD="true"
-export RUN_SQL="false"
+export RUN_LOAD="false"
+export RUN_SQL="true"
 export RUN_SINGLE_USER_REPORTS="false"
 
 export RUN_QGEN="false"

@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654865366 as a seed to the RNG
+-- using 1654866967 as a seed to the RNG
 
 
 select
@@ -14,7 +14,7 @@ from
 		from
 			customer left outer join orders on
 				c_custkey = o_custkey
-				and o_comment not like '%pending%packages%'
+				and o_comment not like '%unusual%deposits%'
 		group by
 			c_custkey
 	) as c_orders (c_custkey, c_count)

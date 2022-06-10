@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654865366 as a seed to the RNG
+-- using 1654866967 as a seed to the RNG
 
 
 select
@@ -21,7 +21,7 @@ from
 where
 	p_partkey = ps_partkey
 	and s_suppkey = ps_suppkey
-	and p_size = 4
+	and p_size = 40
 	and p_type like '%COPPER'
 	and s_nationkey = n_nationkey
 	and n_regionkey = r_regionkey

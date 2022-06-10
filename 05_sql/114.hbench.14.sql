@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654865366 as a seed to the RNG
+-- using 1654866967 as a seed to the RNG
 
 
 select
@@ -14,6 +14,6 @@ from
 	part
 where
 	l_partkey = p_partkey
-	and l_shipdate >= date '1994-03-01'
-	and l_shipdate < date '1994-03-01' + interval '1' month;
+	and l_shipdate >= date '1997-03-01'
+	and l_shipdate < date '1997-03-01' + interval '1' month;
 where rownum <= -1;

@@ -1,6 +1,6 @@
 set role hbench;
 :EXPLAIN_ANALYZE
--- using 1654865366 as a seed to the RNG
+-- using 1654866967 as a seed to the RNG
 
 
 select
@@ -8,8 +8,8 @@ select
 from
 	lineitem
 where
-	l_shipdate >= date '1993-01-01'
-	and l_shipdate < date '1993-01-01' + interval '1' year
-	and l_discount between 0.03 - 0.01 and 0.03 + 0.01
-	and l_quantity < 24;
+	l_shipdate >= date '1994-01-01'
+	and l_shipdate < date '1994-01-01' + interval '1' year
+	and l_discount between 0.02 - 0.01 and 0.02 + 0.01
+	and l_quantity < 25;
 where rownum <= -1;
