@@ -7,15 +7,15 @@ export GEN_DATA_SCALE="1"
 export MULTI_USER_COUNT="1"
 
 # step options
-export RUN_COMPILE_TPCDS="true"
+export RUN_COMPILE_TPCH="true"
 
 # To run another TPC-DS with a different BENCH_ROLE using existing tables and data
 # the queries need to be regenerated with the new role
 # change BENCH_ROLE and set RUN_GEN_DATA to true and GEN_NEW_DATA to false
 # GEN_NEW_DATA only takes affect when RUN_GEN_DATA is true, and the default setting
 # should true under normal circumstances
-export RUN_GEN_DATA="false"
-export GEN_NEW_DATA="false"
+export RUN_GEN_DATA="true"
+export GEN_NEW_DATA="true"
 
 export RUN_INIT="false"
 

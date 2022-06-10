@@ -22,16 +22,18 @@ fi
 
 rm -f ${DATA_DIRECTORY}/*
 
-#for single nodes, you might only have a single segment but dsdgen requires at least 2
+#for single nodes, you might only have a single segment but dbgen requires at least 2
 if [ "$PARALLEL" -eq "1" ]; then
 	PARALLEL="2"
 	SINGLE_SEGMENT="1"
 fi
 
 cd ${PWD}
-${PWD}/dsdgen -scale ${GEN_DATA_SCALE} -dir ${DATA_DIRECTORY} -parallel ${PARALLEL} -child ${CHILD} -terminate n
-
+cd $DATA_DIRECTORY
+# ${PWD}/dbgen -scale ${GEN_DATA_SCALE} -dir ${DATA_DIRECTORY} -parallel ${PARALLEL} -child ${CHILD} -terminate n
+$PWD/dbgen -s $GEN_DATA_SCALE -C $PARALLEL -S $CHILD -v
 # make sure there is a file in each directory so that gpfdist doesn't throw an error
+cd ${PWD}
 declare -a tables=("call_center" "catalog_page" "catalog_returns" "catalog_sales" "customer" "customer_address" "customer_demographics" "date_dim" "household_demographics" "income_band" "inventory" "item" "promotion" "reason" "ship_mode" "store" "store_returns" "store_sales" "time_dim" "warehouse" "web_page" "web_returns" "web_sales" "web_site")
 
 for i in "${tables[@]}"; do
@@ -42,14 +44,16 @@ for i in "${tables[@]}"; do
 	fi
 done
 
-#for single nodes, you might only have a single segment but dsdgen requires at least 2
+#for single nodes, you might only have a single segment but dbgen requires at least 2
 if [ "$SINGLE_SEGMENT" -eq "1" ]; then
 	CHILD="2"
 	#build the second list of files
-	${PWD}/dsdgen -scale ${GEN_DATA_SCALE} -dir ${DATA_DIRECTORY} -parallel ${PARALLEL} -child ${CHILD} -terminate n
-
+	# ${PWD}/dbgen -scale ${GEN_DATA_SCALE} -dir ${DATA_DIRECTORY} -parallel ${PARALLEL} -child ${CHILD} -terminate n
+    cd $DATA_DIRECTORY
+	$PWD/dbgen -s $GEN_DATA_SCALE -C $PARALLEL -S $CHILD -f -v
+	cd ${PWD}
 	# make sure there is a file in each directory so that gpfdist doesn't throw an error
-	declare -a tables=("call_center" "catalog_page" "catalog_returns" "catalog_sales" "customer" "customer_address" "customer_demographics" "date_dim" "household_demographics" "income_band" "inventory" "item" "promotion" "reason" "ship_mode" "store" "store_returns" "store_sales" "time_dim" "warehouse" "web_page" "web_returns" "web_sales" "web_site")
+	declare -a tables=("supplier" "region" "part" "partsupp" "customer" "orders" "nation" "lineitem")
 
 	for i in "${tables[@]}"; do
 		filename="${DATA_DIRECTORY}/${i}_${CHILD}_${PARALLEL}.dat"
