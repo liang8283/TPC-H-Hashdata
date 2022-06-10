@@ -18,6 +18,14 @@ function make_tpc()
   cd ..
 }
 
+function copy_queries()
+{
+  rm -rf ${TPC_DS_DIR}/*_gen_data/queries
+  rm -rf ${TPC_DS_DIR}/*_multi_user/queries
+  cp -R ${PWD}/dbgen/queries ${TPC_DS_DIR}/*_gen_data/
+  cp -R ${PWD}/dbgen/queries ${TPC_DS_DIR}/*_multi_user/
+}
+
 function copy_tpc()
 {
   cp ${PWD}/dbgen/qgen ../*_gen_data/queries/
@@ -30,14 +38,6 @@ function copy_tpc()
   for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
     scp ${PWD}/dbgen/dbgen ${PWD}/dbgen/dists.dss ${i}:
   done
-}
-
-function copy_queries()
-{
-  rm -rf ${TPC_DS_DIR}/*_gen_data/queries
-  rm -rf ${TPC_DS_DIR}/*_multi_user/queries
-  cp -R ${PWD}/dbgen/queries ${TPC_DS_DIR}/*_gen_data/
-  cp -R ${PWD}/dbgen/queries ${TPC_DS_DIR}/*_multi_user/
 }
 
 make_tpc
