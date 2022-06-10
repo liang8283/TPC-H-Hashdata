@@ -23,14 +23,14 @@ if [ "$return_status" -eq "0" ]; then
 
 	start_log
 	id=${max_id}
-	schema_name="tpcds"
-	table_name="tpcds"
-	analyzedb -d ${dbname} -s tpcds --full -a
+	schema_name="tpch"
+	table_name="tpch"
+	analyzedb -d ${dbname} -s tpch --full -a
 	tuples="0"
 	print_log ${tuples}
 else
 	#get stats on all non-partitioned tables and all partitions
-	for i in $(psql -A -t -v ON_ERROR_STOP=ON -c "SELECT lpad(row_number() over() + $max_id, 3, '0') || '.' || n.nspname || '.' || c.relname FROM pg_class c JOIN pg_namespace n on c.relnamespace = n.oid WHERE n.nspname = 'tpcds' AND c.relname NOT IN (SELECT DISTINCT tablename FROM pg_partitions p WHERE schemaname = 'tpcds') AND c.reltuples::bigint = 0"); do
+	for i in $(psql -A -t -v ON_ERROR_STOP=ON -c "SELECT lpad(row_number() over() + $max_id, 3, '0') || '.' || n.nspname || '.' || c.relname FROM pg_class c JOIN pg_namespace n on c.relnamespace = n.oid WHERE n.nspname = 'tpch' AND c.relname NOT IN (SELECT DISTINCT tablename FROM pg_partitions p WHERE schemaname = 'tpch') AND c.reltuples::bigint = 0"); do
 
 		start_log
 		id=$(echo ${i} | awk -F '.' '{print $1}')
@@ -44,7 +44,7 @@ else
 	done
 
 	#analyze root partitions of partitioned tables
-	for i in $(psql -A -t -v ON_ERROR_STOP=ON -c "SELECT lpad(row_number() over() + $max_id, 3, '0') || '.' || n.nspname || '.' || c.relname FROM pg_class c JOIN pg_namespace n on c.relnamespace = n.oid WHERE n.nspname = 'tpcds' AND c.relname IN (SELECT DISTINCT tablename FROM pg_partitions p WHERE schemaname = 'tpcds') AND c.reltuples::bigint = 0"); do
+	for i in $(psql -A -t -v ON_ERROR_STOP=ON -c "SELECT lpad(row_number() over() + $max_id, 3, '0') || '.' || n.nspname || '.' || c.relname FROM pg_class c JOIN pg_namespace n on c.relnamespace = n.oid WHERE n.nspname = 'tpch' AND c.relname IN (SELECT DISTINCT tablename FROM pg_partitions p WHERE schemaname = 'tpch') AND c.reltuples::bigint = 0"); do
 		start_log
 
 		id=$(echo ${i} | awk -F '.' '{print $1}')
