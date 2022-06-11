@@ -1,7 +1,7 @@
 set role hbench;
 set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654927959 as a seed to the RNG
+-- using 1654928386 as a seed to the RNG
 
 
 select
@@ -15,5 +15,5 @@ from
 	part
 where
 	l_partkey = p_partkey
-	and l_shipdate >= date '1995-11-01'
-	and l_shipdate < date '1995-11-01' + interval '1' month;
+	and l_shipdate >= date '1994-12-01'
+	and l_shipdate < date '1994-12-01' + interval '1' month;

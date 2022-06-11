@@ -1,7 +1,7 @@
 set role hbench;
 set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654927959 as a seed to the RNG
+-- using 1654928386 as a seed to the RNG
 
 
 select
@@ -14,9 +14,9 @@ from
 	part
 where
 	p_partkey = ps_partkey
-	and p_brand <> 'Brand#23'
-	and p_type not like 'MEDIUM ANODIZED%'
-	and p_size in (36, 32, 10, 25, 14, 9, 4, 49)
+	and p_brand <> 'Brand#55'
+	and p_type not like 'STANDARD PLATED%'
+	and p_size in (13, 45, 22, 48, 27, 23, 25, 17)
 	and ps_suppkey not in (
 		select
 			s_suppkey

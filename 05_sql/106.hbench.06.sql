@@ -1,7 +1,7 @@
 set role hbench;
 set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654927959 as a seed to the RNG
+-- using 1654928386 as a seed to the RNG
 
 
 select
@@ -11,5 +11,5 @@ from
 where
 	l_shipdate >= date '1996-01-01'
 	and l_shipdate < date '1996-01-01' + interval '1' year
-	and l_discount between 0.04 - 0.01 and 0.04 + 0.01
-	and l_quantity < 24;
+	and l_discount between 0.03 - 0.01 and 0.03 + 0.01
+	and l_quantity < 25;

@@ -1,7 +1,7 @@
 set role hbench;
 set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654927959 as a seed to the RNG
+-- using 1654928386 as a seed to the RNG
 
 
 select
@@ -28,7 +28,7 @@ from
 			and p_partkey = l_partkey
 			and o_orderkey = l_orderkey
 			and s_nationkey = n_nationkey
-			and p_name like '%mint%'
+			and p_name like '%peru%'
 	) as profit
 group by
 	nation,
