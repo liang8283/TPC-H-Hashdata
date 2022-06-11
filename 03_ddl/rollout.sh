@@ -79,7 +79,7 @@ DropRole="DROP ROLE IF EXISTS ${BENCH_ROLE}"
 CreateRole="CREATE ROLE ${BENCH_ROLE}"
 GrantSchemaPrivileges="GRANT ALL PRIVILEGES ON SCHEMA tpch TO ${BENCH_ROLE}"
 GrantTablePrivileges="GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA tpch TO ${BENCH_ROLE}"
-SetSearchPath="ALTER database gpadmin SET search_path=tpch, \"\${user}\", public"
+#SetSearchPath="ALTER database gpadmin SET search_path=tpch, \"\${user}\", public"
 
 start_log
 
@@ -94,8 +94,8 @@ if [ "${BENCH_ROLE}" != "gpadmin" ]; then
   psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${GrantTablePrivileges}"
 fi
 
-log_time "Set search_path for database gpadmin"
-psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${SetSearchPath}"
+#log_time "Set search_path for database gpadmin"
+#psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${SetSearchPath}"
 
 print_log
 
