@@ -12,7 +12,7 @@ with frequent_ss_items as
   group by substr(i_item_desc,1,30),i_item_sk,d_date
   having count(*) >4),
  max_store_sales as
- (select max(csales) tpcds_cmax 
+ (select max(csales) tpch_cmax 
   from (select c_customer_sk,sum(ss_quantity*ss_sales_price) csales
         from store_sales
             ,customer
@@ -62,7 +62,7 @@ with frequent_ss_items as
   group by substr(i_item_desc,1,30),i_item_sk,d_date
   having count(*) >4),
  max_store_sales as
- (select max(csales) tpcds_cmax
+ (select max(csales) tpch_cmax
   from (select c_customer_sk,sum(ss_quantity*ss_sales_price) csales
         from store_sales
             ,customer

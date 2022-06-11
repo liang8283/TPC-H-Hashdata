@@ -46,7 +46,7 @@ echo "##########################################################################
 echo ""
 
 # We assume that the flag variable names are consistent with the corresponding directory names.
-# For example, `00_compile_tpch directory` name will be used to get `true` or `false` value from `RUN_COMPILE_TPCH` in `tpcds_variables.sh`.
+# For example, `00_compile_tpch directory` name will be used to get `true` or `false` value from `RUN_COMPILE_TPCH` in `tpch_variables.sh`.
 for i in $(ls -d ${PWD}/0*); do
   # split by the first underscore and extract the step name.
   step_name=${i#*_}

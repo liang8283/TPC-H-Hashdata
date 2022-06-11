@@ -58,16 +58,16 @@ To run the benchmark, login as `gpadmin` on `mdw:
 ```
 ssh gpadmin@mdw
 cd ~/TPC-DS
-./tpcds.sh
+./tpch.sh
 ```
 
 By default, it will run a scale 1 (1G) and with 1 concurrent users, from data generation to score computation.
 
 ### Configuration Options
 
-By changing the `tpcds_variables.sh`, we can control how this benchmark will run.
+By changing the `tpch_variables.sh`, we can control how this benchmark will run.
 
-This is the default example at [tpcds_variables.sh](https://github.com/RyanWei/TPC-DS-HashData/blob/main/tpcds_variables.sh)
+This is the default example at [tpch_variables.sh](https://github.com/RyanWei/TPC-DS-HashData/blob/main/tpch_variables.sh)
 
 ```shell
 # environment options
@@ -78,7 +78,7 @@ GEN_DATA_SCALE="1"
 MULTI_USER_COUNT="1"
 
 # step options
-RUN_COMPILE_TPCDS="true"
+RUN_COMPILE_tpch="true"
 RUN_GEN_DATA="true"
 RUN_INIT="true"
 RUN_DDL="true"
@@ -95,7 +95,7 @@ EXPLAIN_ANALYZE="false"
 RANDOM_DISTRIBUTION="false"
 ```
 
-`tpcds.sh` will validate existence of those variables.
+`tpch.sh` will validate existence of those variables.
 
 #### Environment Options
 
@@ -139,7 +139,7 @@ GEN_DATA_SCALE="3000"
 
 ```shell
 # step options
-RUN_COMPILE_TPCDS="true"
+RUN_COMPILE_tpch="true"
 RUN_GEN_DATA="true"
 RUN_INIT="true"
 RUN_DDL="true"
@@ -152,7 +152,7 @@ RUN_SCORE="true"
 ```
 
 There are multiple steps running the benchmark and controlled by these variables:
-- `RUN_COMPILE_TPCDS`: default `true`.
+- `RUN_COMPILE_tpch`: default `true`.
   It will compile the `dsdgen` and `dsqgen`.
   Usually we only want to compile those binaries once.
   In the rerun, just set this value to `false`.
@@ -176,7 +176,7 @@ There are multiple steps running the benchmark and controlled by these variables
 - `RUN_SQL`: default `true`.
   It will run the power test of the benchmark.
 - `RUN_SINGLE_USER_REPORTS`: default `true`.
-  It will upload the results to the Greenplum database `gpadmin` under schema `tpcds_reports`.
+  It will upload the results to the Greenplum database `gpadmin` under schema `tpch_reports`.
   These tables are required later on in the `RUN_SCORE` step.
   Recommend to keep it `true` if above step of `RUN_SQL` is `true`.
 - `RUN_MULTI_USER`: default `true`.
@@ -185,15 +185,15 @@ There are multiple steps running the benchmark and controlled by these variables
   `dsqgen` will sample the database to find proper filters.
   For very large database and a lot of streams, this process can take a long time (hours) to just generate the queries.
 - `RUN_MULTI_USER_REPORTS`: default `true`.
-  It will upload the results to the Greenplum database `gpadmin` under schema `tpcds_reports`.
+  It will upload the results to the Greenplum database `gpadmin` under schema `tpch_reports`.
   Recommend to keep it `true` if above step of `RUN_MULTI_USER` is `true`.
 - `RUN_SCORE`: default `true`.
-  It will query the results from `tpcds_reports` and compute the `QphDS` based on supported benchmark standard.
+  It will query the results from `tpch_reports` and compute the `QphDS` based on supported benchmark standard.
   Recommend to keep it `true` if you want to see the final score of the run.
 
 If any above variable is missing or invalid, the script will abort and show the missing or invalid variable name.
 
-**WARNING**: Now TPC-DS does not rely on the log folder to run or skip the steps. It will only run the steps that are specified explicitly as `true`  in the `tpcds_variables.sh`. If any necessary step is speficied as `false` but has never been executed before, the script will abort when it tries to access something that does not exist in the database or under the directory.
+**WARNING**: Now TPC-DS does not rely on the log folder to run or skip the steps. It will only run the steps that are specified explicitly as `true`  in the `tpch_variables.sh`. If any necessary step is speficied as `false` but has never been executed before, the script will abort when it tries to access something that does not exist in the database or under the directory.
 
 #### Miscellaneous Options
 
@@ -228,13 +228,13 @@ Table storage is defined in `functions.sh` and is configured for optimal perform
 Example of running the benchmark as `root` as a background process:
 
 ```bash
-nohup ./tpcds.sh > tpcds.log 2>&1 < tpcds.log &
+nohup ./tpch.sh > tpch.log 2>&1 < tpch.log &
 ```
 
 ### Play with different options
 - Change different storage options in `functions.sh` to try with different compress options and whether use AO/CO storage.
 - Replace some of the tables' DDL with the `*.sql.partition` files in folder `03_ddl` to use partition for some of the non-dimension tables. No partition is used by default.
-- Steps `RUN_COMPILE_TPCDS` and `RUN_GEN_DATA` only need to be executed once. 
+- Steps `RUN_COMPILE_tpch` and `RUN_GEN_DATA` only need to be executed once. 
 
 
 ## Benchmark Minor Modifications

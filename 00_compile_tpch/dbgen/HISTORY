@@ -249,7 +249,7 @@ Changes as of 02/21/95
    -- included revised DDL with changes for char/varchar and l_quantity
    -- updated DBGEN help message to include new single table options for
            order/lineitem and part/partsupp
-   -- included handling for multi-set seed files TPCDSEED.xxx
+   -- included handling for multi-set seed files tpchEED.xxx
    -- generated seeds up through 400GB; headed to 1TB!
    -- ANSI lint cleanup; more needed
    -- UF2 now defaults to key lists; use "-O r" to generate key ranges

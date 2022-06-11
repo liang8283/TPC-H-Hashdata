@@ -1,1 +1,1 @@
-COPY tpcds_reports.compile_tpcds FROM :LOGFILE WITH DELIMITER '|';
+COPY tpch_reports.compile_tpch FROM :LOGFILE WITH DELIMITER '|';

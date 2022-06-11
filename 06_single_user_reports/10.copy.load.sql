@@ -1,1 +1,1 @@
-COPY tpcds_reports.load FROM :LOGFILE WITH DELIMITER '|';
+COPY tpch_reports.load FROM :LOGFILE WITH DELIMITER '|';

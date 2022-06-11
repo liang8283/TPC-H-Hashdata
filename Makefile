@@ -3,7 +3,7 @@ all: lint
 SHELL := /bin/bash
 
 export SUPER_LINTER_VERSION='v4.8.5'
-export EXCLUDED_DIRECTORY='00_compile_tpcds/t.*/.*'
+export EXCLUDED_DIRECTORY='00_compile_tpch/t.*/.*'
 
 .PHONY: dependencies
 dependencies:
@@ -12,7 +12,7 @@ dependencies:
 
 .PHONY: lint
 lint:
-	find . -name "*.sh" -not -path './00_compile_tpcds/t*' | xargs shellcheck -S warning
+	find . -name "*.sh" -not -path './00_compile_tpch/t*' | xargs shellcheck -S warning
 
 .PHONY: super-linter
 super-linter:

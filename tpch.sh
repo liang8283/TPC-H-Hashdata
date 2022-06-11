@@ -2,7 +2,7 @@
 set -e
 
 PWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-VARS_FILE="$PWD/tpcds_variables.sh"
+VARS_FILE="$PWD/tpch_variables.sh"
 FUNCTIONS_FILE="$PWD/functions.sh"
 
 source $VARS_FILE

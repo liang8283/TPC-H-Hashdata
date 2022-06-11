@@ -24,7 +24,7 @@ for i in ${PWD}/*.copy.*.sql; do
 	echo ""
 done
 
-psql -v ON_ERROR_STOP=1 -q -t -A -c "select 'analyze ' || n.nspname || '.' || c.relname || ';' from pg_class c join pg_namespace n on n.oid = c.relnamespace and n.nspname = 'tpcds_reports'" | psql -v ON_ERROR_STOP=1 -t -A -e
+psql -v ON_ERROR_STOP=1 -q -t -A -c "select 'analyze ' || n.nspname || '.' || c.relname || ';' from pg_class c join pg_namespace n on n.oid = c.relnamespace and n.nspname = 'tpch_reports'" | psql -v ON_ERROR_STOP=1 -t -A -e
 
 echo "********************************************************************************"
 echo "Generate Data"

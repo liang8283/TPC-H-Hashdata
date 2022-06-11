@@ -23,7 +23,7 @@ for i in ${TPC_DS_DIR}/log/rollout_testing_*; do
 	psql -v ON_ERROR_STOP=1 -a -f ${filename} -v LOGFILE="${logfile}"
 done
 
-psql -v ON_ERROR_STOP=1 -t -A -c "select 'analyze ' || n.nspname || '.' || c.relname || ';' from pg_class c join pg_namespace n on n.oid = c.relnamespace and n.nspname = 'tpcds_testing'" | psql -v ON_ERROR_STOP=1 -t -A -e
+psql -v ON_ERROR_STOP=1 -t -A -c "select 'analyze ' || n.nspname || '.' || c.relname || ';' from pg_class c join pg_namespace n on n.oid = c.relnamespace and n.nspname = 'tpch_testing'" | psql -v ON_ERROR_STOP=1 -t -A -e
 
 psql -v ON_ERROR_STOP=1 -F $'\t' -A -P pager=off -f ${PWD}/detailed_report.sql
 echo ""
