@@ -1,6 +1,7 @@
 set role hbench;
+set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654866967 as a seed to the RNG
+-- using 1654927959 as a seed to the RNG
 
 
 select
@@ -22,13 +23,12 @@ from
 	lineitem
 where
 	o_orderkey = l_orderkey
-	and l_shipmode in ('REG AIR', 'MAIL')
+	and l_shipmode in ('AIR', 'RAIL')
 	and l_commitdate < l_receiptdate
 	and l_shipdate < l_commitdate
-	and l_receiptdate >= date '1997-01-01'
-	and l_receiptdate < date '1997-01-01' + interval '1' year
+	and l_receiptdate >= date '1995-01-01'
+	and l_receiptdate < date '1995-01-01' + interval '1' year
 group by
 	l_shipmode
 order by
 	l_shipmode;
-where rownum <= -1;

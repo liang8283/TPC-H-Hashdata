@@ -39,4 +39,4 @@ where
 		and l_shipmode in ('AIR', 'AIR REG')
 		and l_shipinstruct = 'DELIVER IN PERSON'
 	);
-:n -1
+--end q19

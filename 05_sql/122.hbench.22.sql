@@ -1,6 +1,7 @@
 set role hbench;
+set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654866967 as a seed to the RNG
+-- using 1654927959 as a seed to the RNG
 
 
 select
@@ -16,7 +17,7 @@ from
 			customer
 		where
 			substring(c_phone from 1 for 2) in
-				('24', '11', '27', '34', '31', '14', '33')
+				('21', '15', '13', '22', '34', '27', '26')
 			and c_acctbal > (
 				select
 					avg(c_acctbal)
@@ -25,7 +26,7 @@ from
 				where
 					c_acctbal > 0.00
 					and substring(c_phone from 1 for 2) in
-						('24', '11', '27', '34', '31', '14', '33')
+						('21', '15', '13', '22', '34', '27', '26')
 			)
 			and not exists (
 				select
@@ -40,4 +41,3 @@ group by
 	cntrycode
 order by
 	cntrycode;
-where rownum <= -1;

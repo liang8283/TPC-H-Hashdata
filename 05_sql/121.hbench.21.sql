@@ -1,6 +1,7 @@
 set role hbench;
+set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654866967 as a seed to the RNG
+-- using 1654927959 as a seed to the RNG
 
 
 select
@@ -36,10 +37,10 @@ where
 			and l3.l_receiptdate > l3.l_commitdate
 	)
 	and s_nationkey = n_nationkey
-	and n_name = 'JORDAN'
+	and n_name = 'EGYPT'
 group by
 	s_name
 order by
 	numwait desc,
-	s_name;
-where rownum <= 100;
+	s_name
+LIMIT 100;

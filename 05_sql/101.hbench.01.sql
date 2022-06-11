@@ -1,6 +1,7 @@
 set role hbench;
+set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654866967 as a seed to the RNG
+-- using 1654927959 as a seed to the RNG
 
 
 select
@@ -24,4 +25,3 @@ group by
 order by
 	l_returnflag,
 	l_linestatus;
-where rownum <= -1;

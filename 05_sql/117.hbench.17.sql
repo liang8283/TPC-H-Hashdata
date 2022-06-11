@@ -1,6 +1,7 @@
 set role hbench;
+set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654866967 as a seed to the RNG
+-- using 1654927959 as a seed to the RNG
 
 
 select
@@ -10,8 +11,8 @@ from
 	part
 where
 	p_partkey = l_partkey
-	and p_brand = 'Brand#11'
-	and p_container = 'WRAP BAG'
+	and p_brand = 'Brand#32'
+	and p_container = 'JUMBO PACK'
 	and l_quantity < (
 		select
 			0.2 * avg(l_quantity)
@@ -20,4 +21,3 @@ where
 		where
 			l_partkey = p_partkey
 	);
-where rownum <= -1;

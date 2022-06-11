@@ -1,6 +1,7 @@
 set role hbench;
+set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654866967 as a seed to the RNG
+-- using 1654927959 as a seed to the RNG
 
 
 select
@@ -16,13 +17,13 @@ where
 	c_mktsegment = 'HOUSEHOLD'
 	and c_custkey = o_custkey
 	and l_orderkey = o_orderkey
-	and o_orderdate < date '1995-03-10'
-	and l_shipdate > date '1995-03-10'
+	and o_orderdate < date '1995-03-26'
+	and l_shipdate > date '1995-03-26'
 group by
 	l_orderkey,
 	o_orderdate,
 	o_shippriority
 order by
 	revenue desc,
-	o_orderdate;
-where rownum <= 10;
+	o_orderdate
+LIMIT 10;
