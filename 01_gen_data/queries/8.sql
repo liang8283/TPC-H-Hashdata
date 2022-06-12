@@ -1,3 +1,4 @@
+--begin q08
 -- $ID$
 -- TPC-H/TPC-R National Market Share Query (Q8)
 -- Functional Query Definition

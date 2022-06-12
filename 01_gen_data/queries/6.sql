@@ -1,3 +1,4 @@
+--begin q06
 -- $ID$
 -- TPC-H/TPC-R Forecasting Revenue Change Query (Q6)
 -- Functional Query Definition

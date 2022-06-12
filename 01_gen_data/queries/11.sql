@@ -1,3 +1,4 @@
+--begin q11
 -- $ID$
 -- TPC-H/TPC-R Important Stock Identification Query (Q11)
 -- Functional Query Definition

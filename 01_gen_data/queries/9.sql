@@ -1,3 +1,4 @@
+--begin q09
 -- $ID$
 -- TPC-H/TPC-R Product Type Profit Measure Query (Q9)
 -- Functional Query Definition

@@ -1,3 +1,4 @@
+--begin q12
 -- $ID$
 -- TPC-H/TPC-R Shipping Modes and Order Priority Query (Q12)
 -- Functional Query Definition

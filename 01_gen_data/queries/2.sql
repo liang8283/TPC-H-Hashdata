@@ -1,3 +1,4 @@
+--begin q02
 -- $ID$
 -- TPC-H/TPC-R Minimum Cost Supplier Query (Q2)
 -- Functional Query Definition
