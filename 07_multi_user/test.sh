@@ -52,7 +52,7 @@ function generate_queries()
 		#sed -n ${start_position},${end_position}p ${sql_dir}/${tpch_query_name} >> ${sql_dir}/${filename}
 		#query_id=$((query_id + 1))
 		echo "sed -n \"$start_position\",\"$end_position\"p $sql_dir/$tpch_query_name >> $sql_dir/$target_filename"
-		sed -n "$start_position","$end_position"p $sql_dir/multi.sql >> $sql_dir/$target_filename
+		sed -n "$start_position","$end_position"p $sql_dir/$tpch_query_name >> $sql_dir/$filename
 		echo "Completed: ${sql_dir}/${filename}"
 	done
 	echo "rm -f ${sql_dir}/query_*.sql"
