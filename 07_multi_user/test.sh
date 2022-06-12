@@ -18,7 +18,7 @@ function generate_queries()
 	tpch_id=$((session_id - 1))
 	tpch_query_name="query_${tpch_id}.sql"
 	query_id=1
-	for p in $(seq 1 99); do
+	for p in $(seq 1 22); do
 		q=$(printf %02d ${query_id})
 		template_filename=query${p}.tpl
 		start_position=""
@@ -38,7 +38,7 @@ function generate_queries()
 
 		#add explain analyze 
 		echo "print \"set role ${BENCH_ROLE};\\n:EXPLAIN_ANALYZE\\n\" > ${sql_dir}/${filename}"
-		printf "set role ${BENCH_ROLE};\n:EXPLAIN_ANALYZE\n" > ${sql_dir}/${filename}
+		printf "set role ${BENCH_ROLE};\nset search_path=$schema_name,public;\n:EXPLAIN_ANALYZE\n" > ${sql_dir}/${filename}
 
 		echo "sed -n ${start_position},${end_position}p ${sql_dir}/${tpch_query_name} >> ${sql_dir}/${filename}"
 		sed -n ${start_position},${end_position}p ${sql_dir}/${tpch_query_name} >> ${sql_dir}/${filename}
@@ -47,24 +47,11 @@ function generate_queries()
 	done
 	echo "rm -f ${sql_dir}/query_*.sql"
 	rm -f ${sql_dir}/${tpch_query_name}
-
-	echo ""
-	echo "queries 14, 23, 24, and 39 have 2 queries in each file.  Need to add :EXPLAIN_ANALYZE to second query in these files"
-	echo ""
-	arr=("*.${BENCH_ROLE}.14.sql" "*.${BENCH_ROLE}.23.sql" "*.${BENCH_ROLE}.24.sql" "*.${BENCH_ROLE}.39.sql")
-
-	for z in "${arr[@]}"; do
-		myfilename=${sql_dir}/${z}
-		echo "myfilename: ${myfilename}"
-		pos=$(grep -n ";" ${myfilename} | awk -F ':' '{ if (NR > 1) print $1}' | head -1)
-		pos=$((pos + 1))
-		sed -i ${pos}i":EXPLAIN_ANALYZE" ${myfilename}
-	done
 }
 
-#if [ "${RUN_QGEN}" = "true" ]; then
-#  generate_queries
-#fi
+if [ "${RUN_QGEN}" = "true" ]; then
+  generate_queries
+fi
 
 tuples="0"
 for i in ${sql_dir}/*.sql; do

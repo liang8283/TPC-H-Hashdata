@@ -60,7 +60,7 @@ function generate_templates()
 		echo "rm -f $sql_dir/*.sql"
 		rm -f $sql_dir/*.sql
 		echo "./qgen -p $i -c -v > $sql_dir/multi.sql"
-		./qgen -p $i -c -v > $sql_dir/query_$1.sql
+		./qgen -p $i -c -v > $sql_dir/query_$i.sql
 	done
 	
 	cd ..
