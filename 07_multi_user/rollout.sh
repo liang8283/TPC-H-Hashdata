@@ -3,6 +3,7 @@
 set -e
 
 PWD=$(get_pwd ${BASH_SOURCE[0]})
+CurrentPath=$(get_pwd ${BASH_SOURCE[0]})
 
 if [ "${MULTI_USER_COUNT}" -eq "0" ]; then
 	echo "MULTI_USER_COUNT set at 0 so exiting..."
@@ -51,16 +52,8 @@ function generate_templates()
 	#${PWD}/dsqgen -streams ${MULTI_USER_COUNT} -input ${PWD}/query_templates/templates.lst -directory ${PWD}/query_templates -dialect pivotal -scale ${GEN_DATA_SCALE} -verbose y -output ${PWD}
 	
 	for i in $(seq 1 $MULTI_USER_COUNT); do
-		sql_dir="$PWD"
-		echo "checking for directory $sql_dir"
-		if [ ! -d "$sql_dir" ]; then
-			echo "mkdir -p $sql_dir"
-			mkdir -p $sql_dir
-		fi
-		echo "rm -f $sql_dir/*.sql"
-		rm -f $sql_dir/*.sql
-		echo "./qgen -p $i -c -v > $sql_dir/query_$i.sql"
-		./qgen -p $i -c -v > $sql_dir/query_$i.sql
+		echo "./qgen -p $i -c -v > $CurrentPath/query_$i.sql"
+		${PWD}/qgen -p $i -c -v > $CurrentPath/query_$i.sql
 	done
 	
 	cd ..
