@@ -17,7 +17,7 @@ schema_name=tpch
 function generate_queries()
 {
 	#going from 1 base to 0 base
-	tpch_id=$((session_id - 1))
+	tpch_id=$((session_id))
 	tpch_query_name="query_${tpch_id}.sql"
 	query_id=1
 	for p in $(seq 1 22); do
