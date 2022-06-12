@@ -51,7 +51,7 @@ function generate_templates()
 	#${PWD}/dsqgen -streams ${MULTI_USER_COUNT} -input ${PWD}/query_templates/templates.lst -directory ${PWD}/query_templates -dialect pivotal -scale ${GEN_DATA_SCALE} -verbose y -output ${PWD}
 	
 	for i in $(seq 1 $MULTI_USER_COUNT); do
-		sql_dir="$PWD"/../tpch/"$i"
+		sql_dir="$PWD"/../"$i"
 		echo "checking for directory $sql_dir"
 		if [ ! -d "$sql_dir" ]; then
 			echo "mkdir -p $sql_dir"
@@ -59,8 +59,20 @@ function generate_templates()
 		fi
 		echo "rm -f $sql_dir/*.sql"
 		rm -f $sql_dir/*.sql
-		echo "./qgen -p $i -c -v > $sql_dir/multi.sql"
-		./qgen -p $i -c -v > $sql_dir/multi.sql
+
+		for ii in $(ls $PWD/*.sql |  xargs -n 1 basename); do
+			q=$(echo $ii | awk -F '.' '{print $1}')
+			id=$(printf %02d $q)
+			file_id="1""$id"
+			filename=${file_id}.${BENCH_ROLE}.${id}.sql
+
+			echo "echo \":EXPLAIN_ANALYZE\" > $PWD/../../05_sql/$filename"
+			printf "set role ${BENCH_ROLE};\nset search_path=$schema_name,public;\n:EXPLAIN_ANALYZE\n" > $PWD/../../05_sql/$filename
+			echo "./qgen $q >> $PWD/../../05_sql/$filename"
+			$PWD/qgen -p $i -c -v $q >> sql_dir/$filename
+		done
+		#echo "./qgen -p $i -c -v > $sql_dir/multi.sql"
+		#./qgen -p $i -c -v > $sql_dir/multi.sql
 	done
 	cd ..
 
