@@ -67,9 +67,9 @@ function generate_templates()
 			filename=${file_id}.${BENCH_ROLE}.${id}.sql
 
 			echo "echo \":EXPLAIN_ANALYZE\" > $PWD/../../05_sql/$filename"
-			printf "set role ${BENCH_ROLE};\nset search_path=$schema_name,public;\n:EXPLAIN_ANALYZE\n" > $PWD/../../05_sql/$filename
+			printf "set role ${BENCH_ROLE};\nset search_path=$schema_name,public;\n:EXPLAIN_ANALYZE\n" > $sql_dir/$filename
 			echo "./qgen $q >> $PWD/../../05_sql/$filename"
-			$PWD/qgen -p $i -c -v $q >> sql_dir/$filename
+			$PWD/qgen -p $i -c -v $q >> $sql_dir/$filename
 		done
 		#echo "./qgen -p $i -c -v > $sql_dir/multi.sql"
 		#./qgen -p $i -c -v > $sql_dir/multi.sql
