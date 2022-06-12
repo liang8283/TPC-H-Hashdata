@@ -1,3 +1,4 @@
+--begin q10
 -- $ID$
 -- TPC-H/TPC-R Returned Item Reporting Query (Q10)
 -- Functional Query Definition

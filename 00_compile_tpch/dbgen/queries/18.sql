@@ -1,3 +1,4 @@
+--begin q18
 -- $ID$
 -- TPC-H/TPC-R Large Volume Customer Query (Q18)
 -- Function Query Definition

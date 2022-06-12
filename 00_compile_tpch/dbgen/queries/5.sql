@@ -1,3 +1,4 @@
+--begin q05
 -- $ID$
 -- TPC-H/TPC-R Local Supplier Volume Query (Q5)
 -- Functional Query Definition
