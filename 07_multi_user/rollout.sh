@@ -63,7 +63,6 @@ function generate_templates()
 	for i in ${PWD}/query_*.sql; do
 		stream_number=$(basename ${i} | awk -F '.' '{print $1}' | awk -F '_' '{print $2}')
 		#going from base 0 to base 1
-		stream_number=$((stream_number + 1))
 		echo "stream_number: ${stream_number}"
 		sql_dir=${PWD}/${stream_number}
 		echo "mv ${i} ${sql_dir}/"
