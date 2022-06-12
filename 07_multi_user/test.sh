@@ -62,9 +62,9 @@ function generate_queries()
 	done
 }
 
-if [ "${RUN_QGEN}" = "true" ]; then
-  generate_queries
-fi
+#if [ "${RUN_QGEN}" = "true" ]; then
+#  generate_queries
+#fi
 
 tuples="0"
 for i in ${sql_dir}/*.sql; do
