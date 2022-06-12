@@ -51,7 +51,7 @@ function generate_templates()
 	#${PWD}/dsqgen -streams ${MULTI_USER_COUNT} -input ${PWD}/query_templates/templates.lst -directory ${PWD}/query_templates -dialect pivotal -scale ${GEN_DATA_SCALE} -verbose y -output ${PWD}
 	
 	for i in $(seq 1 $MULTI_USER_COUNT); do
-		sql_dir="$PWD"/../tpch/"$i"
+		sql_dir="$PWD"
 		echo "checking for directory $sql_dir"
 		if [ ! -d "$sql_dir" ]; then
 			echo "mkdir -p $sql_dir"
@@ -60,7 +60,7 @@ function generate_templates()
 		echo "rm -f $sql_dir/*.sql"
 		rm -f $sql_dir/*.sql
 		echo "./qgen -p $i -c -v > $sql_dir/multi.sql"
-		./qgen -p $i -c -v > $sql_dir/multi.sql
+		./qgen -p $i -c -v > $sql_dir/query_$1.sql
 	done
 	
 	cd ..
