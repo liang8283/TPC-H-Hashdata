@@ -44,10 +44,25 @@ function generate_templates()
 	done
 
 	#Create queries
-	echo "cd ${PWD}"
-	cd ${PWD}
+	echo "cd ${PWD}/queries"
+	cd ${PWD}/queries
+
 	log_time "${PWD}/dsqgen -streams ${MULTI_USER_COUNT} -input ${PWD}/query_templates/templates.lst -directory ${PWD}/query_templates -dialect pivotal -scale ${GEN_DATA_SCALE} -verbose y -output ${PWD}"
-	${PWD}/dsqgen -streams ${MULTI_USER_COUNT} -input ${PWD}/query_templates/templates.lst -directory ${PWD}/query_templates -dialect pivotal -scale ${GEN_DATA_SCALE} -verbose y -output ${PWD}
+	#${PWD}/dsqgen -streams ${MULTI_USER_COUNT} -input ${PWD}/query_templates/templates.lst -directory ${PWD}/query_templates -dialect pivotal -scale ${GEN_DATA_SCALE} -verbose y -output ${PWD}
+	
+	for i in $(seq 1 $MULTI_USER_COUNT); do
+		sql_dir="$PWD"/../tpch/"$i"
+		echo "checking for directory $sql_dir"
+		if [ ! -d "$sql_dir" ]; then
+			echo "mkdir -p $sql_dir"
+			mkdir -p $sql_dir
+		fi
+		echo "rm -f $sql_dir/*.sql"
+		rm -f $sql_dir/*.sql
+		echo "./qgen -p $i -c -v > $sql_dir/multi.sql"
+		./qgen -p $i -c -v > $sql_dir/multi.sql
+	done
+	cd ..
 
 	#move the query_x.sql file to the correct session directory
 	for i in ${PWD}/query_*.sql; do
@@ -86,7 +101,7 @@ while [ "${psql_count}" -gt "0" ]; do
 done
 echo ""
 echo "done."
-echo ""
+echo ""·
 
 get_file_count
 

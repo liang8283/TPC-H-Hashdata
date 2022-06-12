@@ -18,7 +18,6 @@ fi
 
 echo "rm -f $PWD/../05_sql/*.tpch.*.sql"
 rm -f ${TPC_DS_DIR}/05_sql/*.${BENCH_ROLE}.*.sql*
-#rm -f $PWD/../05_sql/*.tpch.*.sql
 
 cd $PWD/queries
 
@@ -30,7 +29,6 @@ for i in $(ls $PWD/*.sql |  xargs -n 1 basename); do
 
 	echo "echo \":EXPLAIN_ANALYZE\" > $PWD/../../05_sql/$filename"
 	printf "set role ${BENCH_ROLE};\nset search_path=$schema_name,public;\n:EXPLAIN_ANALYZE\n" > $PWD/../../05_sql/$filename
-	#echo ":EXPLAIN_ANALYZE" > $PWD/../../05_sql/$filename
 	echo "./qgen $q >> $PWD/../../05_sql/$filename"
 	$PWD/qgen $q >> $PWD/../../05_sql/$filename
 done
