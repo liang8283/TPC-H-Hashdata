@@ -68,7 +68,7 @@ function generate_templates()
 
 			echo "echo \":EXPLAIN_ANALYZE\" > $PWD/../../05_sql/$filename"
 			printf "set role ${BENCH_ROLE};\nset search_path=$schema_name,public;\n:EXPLAIN_ANALYZE\n" > $sql_dir/$filename
-			echo "./qgen $q >> $PWD/../../05_sql/$filename"
+			echo "$PWD/qgen -p $i -c -v $q >> $sql_dir/$filename"
 			$PWD/qgen -p $i -c -v $q >> $sql_dir/$filename
 		done
 		#echo "./qgen -p $i -c -v > $sql_dir/multi.sql"
@@ -77,15 +77,15 @@ function generate_templates()
 	cd ..
 
 	#move the query_x.sql file to the correct session directory
-	for i in ${PWD}/query_*.sql; do
-		stream_number=$(basename ${i} | awk -F '.' '{print $1}' | awk -F '_' '{print $2}')
-		#going from base 0 to base 1
-		stream_number=$((stream_number + 1))
-		echo "stream_number: ${stream_number}"
-		sql_dir=${PWD}/${stream_number}
-		echo "mv ${i} ${sql_dir}/"
-		mv ${i} ${sql_dir}/
-	done
+	#for i in ${PWD}/query_*.sql; do
+	#	stream_number=$(basename ${i} | awk -F '.' '{print $1}' | awk -F '_' '{print $2}')
+	#	#going from base 0 to base 1
+	#	stream_number=$((stream_number + 1))
+	#	echo "stream_number: ${stream_number}"
+	#	sql_dir=${PWD}/${stream_number}
+	#	echo "mv ${i} ${sql_dir}/"
+	#	mv ${i} ${sql_dir}/
+	#done
 }
 
 if [ "${RUN_QGEN}" = "true" ]; then
