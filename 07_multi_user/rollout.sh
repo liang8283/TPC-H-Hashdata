@@ -52,6 +52,7 @@ function generate_templates()
 	#${PWD}/dsqgen -streams ${MULTI_USER_COUNT} -input ${PWD}/query_templates/templates.lst -directory ${PWD}/query_templates -dialect pivotal -scale ${GEN_DATA_SCALE} -verbose y -output ${PWD}
 	
 	for i in $(seq 1 $MULTI_USER_COUNT); do
+		echo "rm -f $CurrentPath/*.sql"
 		echo "./qgen -p $i -c -v > $CurrentPath/query_$i.sql"
 		${PWD}/qgen -p $i -c -v > $CurrentPath/query_$i.sql
 	done
