@@ -21,7 +21,7 @@ function generate_queries()
 	tpch_query_name="query_${tpch_id}.sql"
 	query_id=100
 	
-	for p in $(seq 1 22); do
+	for order in $(seq 1 22); do
 		query_id=$((query_id+1))
 		q=$(printf %02d ${query_id})
 		template_filename=query${p}.tpl
