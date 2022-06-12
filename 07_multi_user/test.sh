@@ -48,9 +48,11 @@ function generate_queries()
 		echo "print \"set role ${BENCH_ROLE};\\n:EXPLAIN_ANALYZE\\n\" > ${sql_dir}/${filename}"
 		printf "set role ${BENCH_ROLE};\nset search_path=$schema_name,public;\n:EXPLAIN_ANALYZE\n" > ${sql_dir}/${filename}
 
-		echo "sed -n ${start_position},${end_position}p ${sql_dir}/${tpch_query_name} >> ${sql_dir}/${filename}"
-		sed -n ${start_position},${end_position}p ${sql_dir}/${tpch_query_name} >> ${sql_dir}/${filename}
-		query_id=$((query_id + 1))
+		#echo "sed -n ${start_position},${end_position}p ${sql_dir}/${tpch_query_name} >> ${sql_dir}/${filename}"
+		#sed -n ${start_position},${end_position}p ${sql_dir}/${tpch_query_name} >> ${sql_dir}/${filename}
+		#query_id=$((query_id + 1))
+		echo "sed -n \"$start_position\",\"$end_position\"p $sql_dir/$tpch_query_name >> $sql_dir/$target_filename"
+		sed -n "$start_position","$end_position"p $sql_dir/multi.sql >> $sql_dir/$target_filename
 		echo "Completed: ${sql_dir}/${filename}"
 	done
 	echo "rm -f ${sql_dir}/query_*.sql"
