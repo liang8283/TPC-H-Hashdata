@@ -30,6 +30,7 @@ function generate_queries()
 		query_number=$(grep begin $sql_dir/$tpch_query_name | head -n"$order" | tail -n1 | awk -F ' ' '{print $2}' | awk -F 'q' '{print $2}')
 		start_position=$(grep -n "begin q""$query_number" $sql_dir/$tpch_query_name | awk -F ':' '{print $1}')
 		end_position=$(grep -n "end q""$query_number" $sql_dir/$tpch_query_name | awk -F ':' '{print $1}')
+		echo $order
 		
 		#for pos in $(grep -n ${template_filename} ${sql_dir}/${tpch_query_name} | awk -F ':' '{print $1}'); do
 		#	if [ "${start_position}" == "" ]; then
