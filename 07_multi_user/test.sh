@@ -28,7 +28,7 @@ function generate_queries()
 		start_position=""
 		end_position=""
 		query_number=$(grep begin $sql_dir/$tpch_query_name | head -n"$order" | tail -n1 | awk -F ' ' '{print $2}' | awk -F 'q' '{print $2}')
-		query_number=$(printf %02d ${query_number})
+		query_number=${query_number:0:2}
 		start_position=$(grep -n "begin q""$query_number" $sql_dir/$tpch_query_name | awk -F ':' '{print $1}')
 		end_position=$(grep -n "end q""$query_number" $sql_dir/$tpch_query_name | awk -F ':' '{print $1}')
 		echo $order
