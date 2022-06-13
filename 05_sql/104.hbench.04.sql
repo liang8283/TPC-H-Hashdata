@@ -1,7 +1,7 @@
 set role hbench;
 set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654928386 as a seed to the RNG
+-- using 1655112420 as a seed to the RNG
 
 
 select
@@ -10,8 +10,8 @@ select
 from
 	orders
 where
-	o_orderdate >= date '1994-07-01'
-	and o_orderdate < date '1994-07-01' + interval '3' month
+	o_orderdate >= date '1995-12-01'
+	and o_orderdate < date '1995-12-01' + interval '3' month
 	and exists (
 		select
 			*

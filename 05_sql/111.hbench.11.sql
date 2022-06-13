@@ -1,7 +1,7 @@
 set role hbench;
 set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654928386 as a seed to the RNG
+-- using 1655112420 as a seed to the RNG
 
 
 select
@@ -14,7 +14,7 @@ from
 where
 	ps_suppkey = s_suppkey
 	and s_nationkey = n_nationkey
-	and n_name = 'GERMANY'
+	and n_name = 'KENYA'
 group by
 	ps_partkey having
 		sum(ps_supplycost * ps_availqty) > (
@@ -27,7 +27,7 @@ group by
 			where
 				ps_suppkey = s_suppkey
 				and s_nationkey = n_nationkey
-				and n_name = 'GERMANY'
+				and n_name = 'KENYA'
 		)
 order by
 	value desc;

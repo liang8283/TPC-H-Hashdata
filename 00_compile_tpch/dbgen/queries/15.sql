@@ -1,5 +1,5 @@
 --begin q15
-- $ID$
+-- $ID$
 -- TPC-H/TPC-R Top Supplier Query (Q15)
 -- Functional Query Definition
 -- Approved February 1998

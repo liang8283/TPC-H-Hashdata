@@ -1,3 +1,4 @@
+--begin q15
 -- $ID$
 -- TPC-H/TPC-R Top Supplier Query (Q15)
 -- Functional Query Definition

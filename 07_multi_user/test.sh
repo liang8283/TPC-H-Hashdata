@@ -24,12 +24,14 @@ function generate_queries()
 	for order in $(seq 1 22); do
 		query_id=$((query_id+1))
 		q=$(printf %02d ${query_id})
-		template_filename=query${p}.tpl
+		template_filename=query${session_id}.tpl
 		start_position=""
 		end_position=""
 		query_number=$(grep begin $sql_dir/$tpch_query_name | head -n"$order" | tail -n1 | awk -F ' ' '{print $2}' | awk -F 'q' '{print $2}')
+		query_number=${query_number:0:2}
 		start_position=$(grep -n "begin q""$query_number" $sql_dir/$tpch_query_name | awk -F ':' '{print $1}')
 		end_position=$(grep -n "end q""$query_number" $sql_dir/$tpch_query_name | awk -F ':' '{print $1}')
+		echo $order
 		
 		#for pos in $(grep -n ${template_filename} ${sql_dir}/${tpch_query_name} | awk -F ':' '{print $1}'); do
 		#	if [ "${start_position}" == "" ]; then
@@ -51,7 +53,7 @@ function generate_queries()
 		#echo "sed -n ${start_position},${end_position}p ${sql_dir}/${tpch_query_name} >> ${sql_dir}/${filename}"
 		#sed -n ${start_position},${end_position}p ${sql_dir}/${tpch_query_name} >> ${sql_dir}/${filename}
 		#query_id=$((query_id + 1))
-		echo "sed -n \"$start_position\",\"$end_position\"p $sql_dir/$tpch_query_name >> $sql_dir/$target_filename"
+		echo "sed -n \"$start_position\",\"$end_position\"p $sql_dir/$tpch_query_name >> $sql_dir/$filename"
 		sed -n "$start_position","$end_position"p $sql_dir/$tpch_query_name >> $sql_dir/$filename
 		echo "Completed: ${sql_dir}/${filename}"
 	done
