@@ -24,7 +24,7 @@ function generate_queries()
 	for order in $(seq 1 22); do
 		query_id=$((query_id+1))
 		q=$(printf %02d ${query_id})
-		template_filename=query${p}.tpl
+		template_filename=query${session_id}.tpl
 		start_position=""
 		end_position=""
 		query_number=$(grep begin $sql_dir/$tpch_query_name | head -n"$order" | tail -n1 | awk -F ' ' '{print $2}' | awk -F 'q' '{print $2}')
