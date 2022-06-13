@@ -1,3 +1,4 @@
+--begin q20
 -- $ID$
 -- TPC-H/TPC-R Potential Part Promotion Query (Q20)
 -- Function Query Definition

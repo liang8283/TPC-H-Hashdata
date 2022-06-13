@@ -1,3 +1,4 @@
+--begin q16
 -- $ID$
 -- TPC-H/TPC-R Parts/Supplier Relationship Query (Q16)
 -- Functional Query Definition

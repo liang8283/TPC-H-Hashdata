@@ -1,3 +1,4 @@
+--begin q22
 -- $ID$
 -- TPC-H/TPC-R Global Sales Opportunity Query (Q22)
 -- Functional Query Definition

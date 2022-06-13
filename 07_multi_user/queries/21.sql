@@ -1,3 +1,4 @@
+--begin q21
 -- $ID$
 -- TPC-H/TPC-R Suppliers Who Kept Orders Waiting Query (Q21)
 -- Functional Query Definition

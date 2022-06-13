@@ -1,3 +1,4 @@
+--begin q19
 -- $ID$
 -- TPC-H/TPC-R Discounted Revenue Query (Q19)
 -- Functional Query Definition

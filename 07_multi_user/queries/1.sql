@@ -1,3 +1,4 @@
+--begin q01
 -- $ID$
 -- TPC-H/TPC-R Pricing Summary Report Query (Q1)
 -- Functional Query Definition

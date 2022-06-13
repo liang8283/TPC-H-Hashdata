@@ -1,7 +1,7 @@
 set role hbench;
 set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654928386 as a seed to the RNG
+-- using 1655112420 as a seed to the RNG
 
 
 select
@@ -23,7 +23,7 @@ where
 				from
 					part
 				where
-					p_name like 'snow%'
+					p_name like 'linen%'
 			)
 			and ps_availqty > (
 				select
@@ -33,11 +33,11 @@ where
 				where
 					l_partkey = ps_partkey
 					and l_suppkey = ps_suppkey
-					and l_shipdate >= date '1995-01-01'
-					and l_shipdate < date '1995-01-01' + interval '1' year
+					and l_shipdate >= date '1997-01-01'
+					and l_shipdate < date '1997-01-01' + interval '1' year
 			)
 	)
 	and s_nationkey = n_nationkey
-	and n_name = 'UNITED KINGDOM'
+	and n_name = 'PERU'
 order by
 	s_name;

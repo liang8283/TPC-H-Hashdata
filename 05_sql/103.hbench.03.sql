@@ -1,7 +1,7 @@
 set role hbench;
 set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1654928386 as a seed to the RNG
+-- using 1655112420 as a seed to the RNG
 
 
 select
@@ -14,11 +14,11 @@ from
 	orders,
 	lineitem
 where
-	c_mktsegment = 'FURNITURE'
+	c_mktsegment = 'HOUSEHOLD'
 	and c_custkey = o_custkey
 	and l_orderkey = o_orderkey
-	and o_orderdate < date '1995-03-11'
-	and l_shipdate > date '1995-03-11'
+	and o_orderdate < date '1995-03-19'
+	and l_shipdate > date '1995-03-19'
 group by
 	l_orderkey,
 	o_orderdate,

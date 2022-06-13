@@ -1,3 +1,4 @@
+--begin q03
 -- $ID$
 -- TPC-H/TPC-R Shipping Priority Query (Q3)
 -- Functional Query Definition

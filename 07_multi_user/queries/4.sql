@@ -1,3 +1,4 @@
+--begin q04
 -- $ID$
 -- TPC-H/TPC-R Order Priority Checking Query (Q4)
 -- Functional Query Definition
