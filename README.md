@@ -226,9 +226,9 @@ These are miscellaneous controlling variables:
 
 Table storage is defined in `functions.sh` and is configured for optimal performance.
 `get_version()` function defines different storage options for different scale of the benchmark.
-- `SMALL_STORAGE`: All the dimension tables
-- `MEDIUM_STORAGE`: `catalog_returns` and `store_returns`
-- `LARGE_STORAGE`: `catalog_sales`, `inventory`, `store_sales`, and `web_sales`
+- `SMALL_STORAGE`: `nation` and `region`
+- `MEDIUM_STORAGE`: `customer`, `part`, `partsupp`, and `supplier`
+- `LARGE_STORAGE`: `lineitem` and `orders`
 
 ### Execution
 
