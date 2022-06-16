@@ -15,8 +15,8 @@ from
 	part
 where
 	p_partkey = l_partkey
-	and p_brand = 'Brand#41'
-	and p_container = 'LG PACK'
+	and p_brand = 'Brand#15'
+	and p_container = 'SM DRUM'
 	and l_quantity < (
 		select
 			0.2 * avg(l_quantity)

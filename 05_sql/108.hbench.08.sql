@@ -1,13 +1,13 @@
 set role hbench;
 set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1655112420 as a seed to the RNG
+-- using 1655345920 as a seed to the RNG
 
 
 select
 	o_year,
 	sum(case
-		when nation = 'EGYPT' then volume
+		when nation = 'VIETNAM' then volume
 		else 0
 	end) / sum(volume) as mkt_share
 from
@@ -32,10 +32,10 @@ from
 			and o_custkey = c_custkey
 			and c_nationkey = n1.n_nationkey
 			and n1.n_regionkey = r_regionkey
-			and r_name = 'MIDDLE EAST'
+			and r_name = 'ASIA'
 			and s_nationkey = n2.n_nationkey
 			and o_orderdate between date '1995-01-01' and date '1996-12-31'
-			and p_type = 'PROMO POLISHED STEEL'
+			and p_type = 'ECONOMY PLATED BRASS'
 	) as all_nations
 group by
 	o_year
