@@ -64,7 +64,7 @@ To run the benchmark, login as `gpadmin` on `mdw:
 
 ```
 ssh gpadmin@mdw
-cd ~/TPC-H
+cd ~/TPC-H-HashData
 ./tpch.sh
 ```
 
