@@ -41,7 +41,7 @@ You can get the latest version by downloading the main branch:
 
 ```bash
 ssh gpadmin@mdw
-git clone https://github.com/hashdata-xyz/TPC-DS-HashData.git
+git clone https://github.com/hashdata-xyz/TPC-H-HashData.git
 ```
 Put the folder under /home/gpadmin/ and change owner to gpadmin.
 
