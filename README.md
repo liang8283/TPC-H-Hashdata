@@ -37,21 +37,21 @@ The original source code is from http://tpc.org/tpc_documents_current_versions/c
 
 ### Download and Install
 
-You can get the latest version by downloading with git:
-
-```bash
-ssh gpadmin@mdw
-git clone https://github.com/hashdata-xyz/TPC-H-HashData.git
-```
-Or
-
-You can get the .tar file:
+You can get released version from the .tar file:
 
 ```
 curl -LO  https://github.com/hashdata-xyz/TPC-H-HashData/archive/refs/tags/v1.0.tar.gz
 tar xzf v1.0.tar.gz
 mv TPC-H-HashData-1.0 TPC-H-HashData
 ```
+
+OR get the current version by downloading with git:
+
+```bash
+ssh gpadmin@mdw
+git clone https://github.com/hashdata-xyz/TPC-H-HashData.git
+```
+
 Put the folder under /home/gpadmin/ and change owner to gpadmin.
 
 ```
