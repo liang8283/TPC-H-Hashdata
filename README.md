@@ -45,12 +45,12 @@ git clone https://github.com/hashdata-xyz/TPC-H-HashData.git
 ```
 Or
 
-You can get the .tar file :
+You can get the .tar file:
+
+```
 curl -LO  https://github.com/hashdata-xyz/TPC-H-HashData/archive/refs/tags/v1.0.tar.gz
 tar xzf v1.1.tar.gz
 mv TPC-H-HashData-1.1 TPC-H-HashData
-```
-
 ```
 Put the folder under /home/gpadmin/ and change owner to gpadmin.
 
