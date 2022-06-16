@@ -17,14 +17,14 @@ function get_psql_count()
 
 function get_file_count()
 {
-	file_count=$(ls ${TPC_DS_DIR}/log/end_testing* 2> /dev/null | wc -l)
+	file_count=$(ls ${TPC_H_DIR}/log/end_testing* 2> /dev/null | wc -l)
 }
 
 
-rm -f ${TPC_DS_DIR}/log/end_testing_*.log
-rm -f ${TPC_DS_DIR}/log/testing*.log
-rm -f ${TPC_DS_DIR}/log/rollout_testing_*.log
-rm -f ${TPC_DS_DIR}/log/*multi.explain_analyze.log
+rm -f ${TPC_H_DIR}/log/end_testing_*.log
+rm -f ${TPC_H_DIR}/log/testing*.log
+rm -f ${TPC_H_DIR}/log/rollout_testing_*.log
+rm -f ${TPC_H_DIR}/log/*multi.explain_analyze.log
 
 function generate_templates()
 {
@@ -75,7 +75,7 @@ if [ "${RUN_QGEN}" = "true" ]; then
 fi
 
 for session_id in $(seq 1 ${MULTI_USER_COUNT}); do
-	session_log=${TPC_DS_DIR}/log/testing_session_${session_id}.log
+	session_log=${TPC_H_DIR}/log/testing_session_${session_id}.log
 	log_time "${PWD}/test.sh ${session_id}"
 	${PWD}/test.sh ${session_id} > ${session_log} 2>&1 < ${session_log} &
 done
@@ -105,4 +105,4 @@ if [ "${file_count}" -ne "${MULTI_USER_COUNT}" ]; then
 	exit 1
 fi
 
-rm -f ${TPC_DS_DIR}/log/end_testing_*.log # remove the counter log file if successful.
+rm -f ${TPC_H_DIR}/log/end_testing_*.log # remove the counter log file if successful.

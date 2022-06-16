@@ -9,7 +9,7 @@ source $VARS_FILE
 source $FUNCTIONS_FILE
 source_bashrc
 
-export TPC_DS_DIR=$(get_pwd ${BASH_SOURCE[0]})
+export TPC_H_DIR=$(get_pwd ${BASH_SOURCE[0]})
 
 # Check that pertinent variables are set in the variable file.
 check_variables

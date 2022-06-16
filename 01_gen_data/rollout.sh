@@ -19,20 +19,20 @@ function get_count_generate_data() {
       next_count="1"
     fi
     count=$((count + next_count))
-  done < ${TPC_DS_DIR}/segment_hosts.txt
+  done < ${TPC_H_DIR}/segment_hosts.txt
 }
 
 function kill_orphaned_data_gen() {
   echo "kill any orphaned dsdgen processes on segment hosts"
   # always return true even if no processes were killed
-  for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
+  for i in $(cat ${TPC_H_DIR}/segment_hosts.txt); do
     ssh ${i} "pkill dsdgen" || true
   done
 }
 
 function copy_generate_data() {
   echo "copy generate_data.sh to segment hosts"
-  for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
+  for i in $(cat ${TPC_H_DIR}/segment_hosts.txt); do
     scp ${PWD}/generate_data.sh ${i}:
   done
 }
@@ -54,7 +54,7 @@ function gen_data() {
     CHILD=$(echo ${i} | awk -F '|' '{print $1}')
     EXT_HOST=$(echo ${i} | awk -F '|' '{print $2}')
     GEN_DATA_PATH=$(echo ${i} | awk -F '|' '{print $3}')
-    GEN_DATA_PATH="${GEN_DATA_PATH}/dsbenchmark"
+    GEN_DATA_PATH="${GEN_DATA_PATH}/hbenchmark"
     echo "ssh -n -f ${EXT_HOST} \"bash -c \'cd ~/; ./generate_data.sh ${GEN_DATA_SCALE} ${CHILD} ${PARALLEL} ${GEN_DATA_PATH} > generate_data.${CHILD}.log 2>&1 < generate_data.${CHILD}.log &\'\""
 
     ssh -n -f ${EXT_HOST} "bash -c 'cd ~/; ./generate_data.sh ${GEN_DATA_SCALE} ${CHILD} ${PARALLEL} ${GEN_DATA_PATH} > generate_data.${CHILD}.log 2>&1 < generate_data.${CHILD}.log &'"
