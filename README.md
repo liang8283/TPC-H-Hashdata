@@ -37,18 +37,16 @@ The original source code is from http://tpc.org/tpc_documents_current_versions/c
 
 ### Download and Install
 
-Visit the repo at https://github.com/RyanWei/TPC-DS-HashData/releases/and download the tarball to the `mdw` node. You can always use the latest version.
+You can get the latest version by downloading the main branch:
 
 ```bash
 ssh gpadmin@mdw
-curl -LO https://github.com/RyanWei/TPC-DS-HashData/archive/refs/tags/v1.1.tar.gz
-tar xzf v1.1.tar.gz
-mv TPC-DS-HashData-1.1 TPC-DS
+git clone https://github.com/hashdata-xyz/TPC-DS-HashData.git
 ```
 Put the folder under /home/gpadmin/ and change owner to gpadmin.
 
 ```
-chown -R gpadmin.gpadmin TPC-DS
+chown -R gpadmin.gpadmin TPC-DS-HashData
 ```
 
 ## Usage
