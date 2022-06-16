@@ -68,7 +68,7 @@ cd ~/TPC-H
 ./tpch.sh
 ```
 
-By default, it will run a scale 1 (1G) and with 1 concurrent users, from data generation to score computation.
+By default, it will run a scale 1 (1G) and with 2 concurrent users, from data generation to score computation.
 
 ### Configuration Options
 
@@ -82,7 +82,7 @@ ADMIN_USER="gpadmin"
 
 # benchmark options
 GEN_DATA_SCALE="1"
-MULTI_USER_COUNT="1"
+MULTI_USER_COUNT="2"
 
 # step options
 RUN_COMPILE_tpch="true"
@@ -246,116 +246,10 @@ nohup ./tpch.sh > tpch.log 2>&1 < tpch.log &
 
 ## Benchmark Minor Modifications
 
-### 1. Change to SQL queries that subtracted or added days were modified slightly:
+### Change to SQL queries that subtracted or added days were modified slightly:
 
-Old:
-```sql
-and (cast('2000-02-28' as date) + 30 days)
-```
-
-New:
-
-```sql
-and (cast('2000-02-28' as date) + '30 days'::interval)
-```
-
-This was done on queries: 5, 12, 16, 20, 21, 32, 37, 40, 77, 80, 82, 92, 94, 95, and 98.
-
-### 2. Change to queries with ORDER BY on column alias to use sub-select.
-
-Old:
-```sql
-select  
-    sum(ss_net_profit) as total_sum
-   ,s_state
-   ,s_county
-   ,grouping(s_state)+grouping(s_county) as lochierarchy
-   ,rank() over (
- 	partition by grouping(s_state)+grouping(s_county),
- 	case when grouping(s_county) = 0 then s_state end 
- 	order by sum(ss_net_profit) desc) as rank_within_parent
- from
-    store_sales
-   ,date_dim       d1
-   ,store
- where
-    d1.d_month_seq between 1212 and 1212+11
- and d1.d_date_sk = ss_sold_date_sk
- and s_store_sk  = ss_store_sk
- and s_state in
-             ( select s_state
-               from  (select s_state as s_state,
- 			    rank() over ( partition by s_state order by sum(ss_net_profit) desc) as ranking
-                      from   store_sales, store, date_dim
-                      where  d_month_seq between 1212 and 1212+11
- 			    and d_date_sk = ss_sold_date_sk
- 			    and s_store_sk  = ss_store_sk
-                      group by s_state
-                     ) tmp1 
-               where ranking <= 5
-             )
- group by rollup(s_state,s_county)
- order by
-   lochierarchy desc
-  ,case when lochierarchy = 0 then s_state end
-  ,rank_within_parent
- limit 100;
-```
-
-New:
-```sql
-select * from ( --new
-select  
-    sum(ss_net_profit) as total_sum
-   ,s_state
-   ,s_county
-   ,grouping(s_state)+grouping(s_county) as lochierarchy
-   ,rank() over (
- 	partition by grouping(s_state)+grouping(s_county),
- 	case when grouping(s_county) = 0 then s_state end 
- 	order by sum(ss_net_profit) desc) as rank_within_parent
- from
-    store_sales
-   ,date_dim       d1
-   ,store
- where
-    d1.d_month_seq between 1212 and 1212+11
- and d1.d_date_sk = ss_sold_date_sk
- and s_store_sk  = ss_store_sk
- and s_state in
-             ( select s_state
-               from  (select s_state as s_state,
- 			    rank() over ( partition by s_state order by sum(ss_net_profit) desc) as ranking
-                      from   store_sales, store, date_dim
-                      where  d_month_seq between 1212 and 1212+11
- 			    and d_date_sk = ss_sold_date_sk
- 			    and s_store_sk  = ss_store_sk
-                      group by s_state
-                     ) tmp1 
-               where ranking <= 5
-             )
- group by rollup(s_state,s_county)
-) AS sub --new
- order by
-   lochierarchy desc
-  ,case when lochierarchy = 0 then s_state end
-  ,rank_within_parent
- limit 100;
-```
-
-This was done on queries: 36 and 70.
-
-### 3. Query templates were modified to exclude columns not found in the query.
-
-In these cases, the common table expression used aliased columns but the dynamic filters included both the alias name as well as the original name.
-Referencing the original column name instead of the alias causes the query parser to not find the column.
-
-This was done on query 86.
-
-### 4. Added table aliases.
-This was done on queries: 2, 14, and 23.
-
-### 5. Added `limit 100` to very large result set queries.
-For the larger tests (e.g. 15TB), a few of the TPC-DS queries can output a very large number of rows which are just discarded.
-
-This was done on queries: 64, 34, and 71.
+1. Query alternative 15 was used in favor of the original so it is easier to parse in
+these scripts.  Performance is essentially the same for both versions.
+2. Query 1 documentation doesn't match query provided by TPC.  Range is supposed to be
+dynamically set between 60 and 120 days and substitution doesn't seem to be working
+with qgen.  So, hard code 90 days until this can be fixed by TPC.
