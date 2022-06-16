@@ -17,7 +17,7 @@ done
 
 for i in ${PWD}/*.copy.*.sql; do
 	logstep=$(echo ${i} | awk -F 'copy.' '{print $2}' | awk -F '.' '{print $1}')
-	logfile="${TPC_DS_DIR}/log/rollout_${logstep}.log"
+	logfile="${TPC_H_DIR}/log/rollout_${logstep}.log"
 	logfile="'${logfile}'"
 	log_time "psql -v ON_ERROR_STOP=1 -a -f ${i} -v LOGFILE=\"${logfile}\""
 	psql -v ON_ERROR_STOP=1 -a -f ${i} -v LOGFILE="${logfile}"

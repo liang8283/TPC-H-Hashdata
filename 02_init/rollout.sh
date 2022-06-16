@@ -20,7 +20,7 @@ function set_segment_bashrc()
   chmod 755 ${PWD}/segment_bashrc
 
   echo "set up .bashrc on segment hosts"
-  for ext_host in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
+  for ext_host in $(cat ${TPC_H_DIR}/segment_hosts.txt); do
     # don't overwrite the master.  Only needed on single node installs
     shortname=$(echo ${ext_host} | awk -F '.' '{print $1}')
     if [ "$MASTER_HOST" != "$shortname" ]; then
@@ -99,11 +99,11 @@ function copy_config()
 {
   echo "copy config files"
   if [ "${MASTER_DATA_DIRECTORY}" != "" ]; then
-    cp ${MASTER_DATA_DIRECTORY}/pg_hba.conf ${TPC_DS_DIR}/log/
-    cp ${MASTER_DATA_DIRECTORY}/postgresql.conf ${TPC_DS_DIR}/log/
+    cp ${MASTER_DATA_DIRECTORY}/pg_hba.conf ${TPC_H_DIR}/log/
+    cp ${MASTER_DATA_DIRECTORY}/postgresql.conf ${TPC_H_DIR}/log/
   fi
   #gp_segment_configuration
-  psql -v ON_ERROR_STOP=1 -q -A -t -c "SELECT * FROM gp_segment_configuration" -o ${TPC_DS_DIR}/log/gp_segment_configuration.txt
+  psql -v ON_ERROR_STOP=1 -q -A -t -c "SELECT * FROM gp_segment_configuration" -o ${TPC_H_DIR}/log/gp_segment_configuration.txt
 }
 
 get_version

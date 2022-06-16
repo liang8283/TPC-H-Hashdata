@@ -15,13 +15,13 @@ THROUGHPUT_ELAPSED_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select max(end_ep
 S_Q=${MULTI_USER_COUNT}
 SF=${GEN_DATA_SCALE}
 
-# Calculate operands for v1.3.1 of the TPC-DS score
+# Calculate operands for v1.3.1 of the TPC-H score
 Q_1_3_1=$(( 3 * S_Q * 99 ))
 TPT_1_3_1=$(( QUERIES_TIME * S_Q ))
 TTT_1_3_1=$(( 2 * CONCURRENT_QUERY_TIME ))
 TLD_1_3_1=$(( S_Q * LOAD_TIME / 100 ))
 
-# Calculate operands for v2.2.0 of the TPC-DS score
+# Calculate operands for v2.2.0 of the TPC-H score
 Q_2_2_0=$(( S_Q * 99 ))
 TPT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select cast(${QUERIES_TIME} as decimal) * cast(${S_Q} as decimal) / cast(3600.0 as decimal)")
 TTT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select cast(2 as decimal) * cast(${THROUGHPUT_ELAPSED_TIME} as decimal) / cast(3600.0 as decimal)")
@@ -39,14 +39,14 @@ printf "1 User Queries\t\t%d\n" "${QUERIES_TIME}"
 printf "Concurrent Queries\t%d\n" "${CONCURRENT_QUERY_TIME}"
 printf "Throughput Test Elapsed Time\t%d\n" "${THROUGHPUT_ELAPSED_TIME}"
 printf "\n"
-printf "TPC-DS v1.3.1 (QphDS@SF = floor(SF * Q / sum(TPT, TTT, TLD)))\n"
+printf "TPC-H v1.3.1 (QphDS@SF = floor(SF * Q / sum(TPT, TTT, TLD)))\n"
 printf "Q (3 * Sq * 99)\t\t%d\n" "${Q_1_3_1}"
 printf "TPT (seconds)\t\t%d\n" "${TPT_1_3_1}"
 printf "TTT (seconds)\t\t%d\n" "${TTT_1_3_1}"
 printf "TLD (seconds)\t\t%d\n" "${TLD_1_3_1}"
 printf "Score\t\t\t%d\n" "${SCORE_1_3_1}"
 printf "\n"
-printf "TPC-DS v2.2.0 (QphDS@SF = floor(SF * Q / geomean(TPT, TTT, TLD)))\n"
+printf "TPC-H v2.2.0 (QphDS@SF = floor(SF * Q / geomean(TPT, TTT, TLD)))\n"
 printf "Q (Sq * 99)\t\t%d\n" "${Q_2_2_0}"
 printf "TPT (hours)\t\t%.3f\n" "${TPT_2_2_0}"
 printf "TTT (hours)\t\t%.3f\n" "${TTT_2_2_0}"

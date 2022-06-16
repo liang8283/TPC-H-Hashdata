@@ -9,7 +9,7 @@ export MULTI_USER_COUNT="2"
 # step options
 export RUN_COMPILE_TPCH="true"
 
-# To run another TPC-DS with a different BENCH_ROLE using existing tables and data
+# To run another TPC-H with a different BENCH_ROLE using existing tables and data
 # the queries need to be regenerated with the new role
 # change BENCH_ROLE and set RUN_GEN_DATA to true and GEN_NEW_DATA to false
 # GEN_NEW_DATA only takes affect when RUN_GEN_DATA is true, and the default setting
@@ -19,7 +19,7 @@ export GEN_NEW_DATA="true"
 
 export RUN_INIT="true"
 
-# To run another TPC-DS with a different BENCH_ROLE using existing tables and data
+# To run another TPC-H with a different BENCH_ROLE using existing tables and data
 # change BENCH_ROLE and set RUN_DDL to true and DROP_EXISTING_TABLES to false
 # DROP_EXISTING_TABLES only takes affect when RUN_DDL is true, and the default setting
 # should true under normal circumstances

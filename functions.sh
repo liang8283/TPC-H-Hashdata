@@ -28,7 +28,7 @@ function check_variables() {
   echo ""
   source ${VARS_FILE} 2> /dev/null
   if [ $? -ne 0 ]; then
-    echo "${VARS_FILE} does not exist. Please ensure that this file exists before running TPC-DS. Exiting."
+    echo "${VARS_FILE} does not exist. Please ensure that this file exists before running TPC-H. Exiting."
     exit 1
   fi
 
@@ -153,7 +153,7 @@ export -f get_version
 
 function init_log() {
   logfile=rollout_${1}.log
-  rm -f ${TPC_DS_DIR}/log/${logfile}
+  rm -f ${TPC_H_DIR}/log/${logfile}
 }
 export -f init_log
 
@@ -180,13 +180,13 @@ function print_log() {
     tuples="0"
   fi
   # calling function adds schema_name and table_name
-  printf "%s|%s.%s|%s|%02d:%02d:%02d|%d|%d\n" ${id} ${schema_name} ${table_name} ${tuples} "$((S_DURATION/3600%24))" "$((S_DURATION/60%60))" "$((S_DURATION%60))" "${T_START}" "${T_END}" >> ${TPC_DS_DIR}/log/${logfile}
+  printf "%s|%s.%s|%s|%02d:%02d:%02d|%d|%d\n" ${id} ${schema_name} ${table_name} ${tuples} "$((S_DURATION/3600%24))" "$((S_DURATION/60%60))" "$((S_DURATION%60))" "${T_START}" "${T_END}" >> ${TPC_H_DIR}/log/${logfile}
 }
 export -f print_log
 
 function end_step() {
   local logfile=end_${1}.log
-  touch ${TPC_DS_DIR}/log/${logfile}
+  touch ${TPC_H_DIR}/log/${logfile}
 }
 export -f end_step
 
@@ -201,6 +201,6 @@ function create_hosts_file() {
   # get_version
 
   SQL_QUERY="SELECT DISTINCT hostname FROM gp_segment_configuration WHERE role = '${GPFDIST_LOCATION}' AND content >= 0"
-  psql -v ON_ERROR_STOP=1 -t -A -c "${SQL_QUERY}" -o ${TPC_DS_DIR}/segment_hosts.txt
+  psql -v ON_ERROR_STOP=1 -t -A -c "${SQL_QUERY}" -o ${TPC_H_DIR}/segment_hosts.txt
 }
 export -f create_hosts_file

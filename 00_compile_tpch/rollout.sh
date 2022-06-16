@@ -20,22 +20,22 @@ function make_tpc()
 
 function copy_queries()
 {
-  rm -rf ${TPC_DS_DIR}/*_gen_data/queries
-  rm -rf ${TPC_DS_DIR}/*_multi_user/queries
-  cp -R ${PWD}/dbgen/queries ${TPC_DS_DIR}/*_gen_data/
-  cp -R ${PWD}/dbgen/queries ${TPC_DS_DIR}/*_multi_user/
+  rm -rf ${TPC_H_DIR}/*_gen_data/queries
+  rm -rf ${TPC_H_DIR}/*_multi_user/queries
+  cp -R ${PWD}/dbgen/queries ${TPC_H_DIR}/*_gen_data/
+  cp -R ${PWD}/dbgen/queries ${TPC_H_DIR}/*_multi_user/
 }
 
 function copy_tpc()
 {
-  cp ${PWD}/dbgen/qgen ${TPC_DS_DIR}/*_gen_data/queries/
-  cp ${PWD}/dbgen/qgen ${TPC_DS_DIR}/*_multi_user/queries/
-  cp ${PWD}/dbgen/dists.dss ${TPC_DS_DIR}/*_gen_data/queries/
-  cp ${PWD}/dbgen/dists.dss ${TPC_DS_DIR}/*_multi_user/queries/
+  cp ${PWD}/dbgen/qgen ${TPC_H_DIR}/*_gen_data/queries/
+  cp ${PWD}/dbgen/qgen ${TPC_H_DIR}/*_multi_user/queries/
+  cp ${PWD}/dbgen/dists.dss ${TPC_H_DIR}/*_gen_data/queries/
+  cp ${PWD}/dbgen/dists.dss ${TPC_H_DIR}/*_multi_user/queries/
 
   #copy the compiled dbgen program to the segment nodes
   echo "copy tpch binaries to segment hosts"
-  for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
+  for i in $(cat ${TPC_H_DIR}/segment_hosts.txt); do
     scp ${PWD}/dbgen/dbgen ${PWD}/dbgen/dists.dss ${i}:
   done
 }

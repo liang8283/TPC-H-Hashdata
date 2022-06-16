@@ -8,9 +8,9 @@ PWD=$(get_pwd ${BASH_SOURCE[0]})
 ################################################################################
 function create_directories()
 {
-  if [ ! -d ${TPC_DS_DIR}/log ]; then
+  if [ ! -d ${TPC_H_DIR}/log ]; then
     echo "Creating log directory"
-    mkdir ${TPC_DS_DIR}/log
+    mkdir ${TPC_H_DIR}/log
   fi
 }
 
@@ -20,7 +20,7 @@ function create_directories()
 create_directories
 
 echo "############################################################################"
-echo "TPC-DS Script for Pivotal Greenplum Database."
+echo "TPC-H Script for Pivotal Greenplum Database."
 echo "############################################################################"
 echo ""
 echo "############################################################################"

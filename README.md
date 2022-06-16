@@ -8,7 +8,7 @@ This repo contains automation of running the DS benchmark on an existing Hashdat
 
 ### Supported TPC-H Versions
 
-TPC has published the following TPC-DS standards over time:
+TPC has published the following TPC-H standards over time:
 | TPC-H Benchmark Version | Published Date | Standard Specification |
 |-|-|-|
 | 3.0.0 (latest) | 2021/06/15 | https://tpc.org/TPC_Documents_Current_Versions/pdf/tpc-h_v3.0.0.pdf|
@@ -74,7 +74,7 @@ By default, it will run a scale 1 (1G) and with 2 concurrent users, from data ge
 
 By changing the `tpch_variables.sh`, we can control how this benchmark will run.
 
-This is the default example at [tpch_variables.sh](https://github.com/RyanWei/TPC-DS-HashData/blob/main/tpch_variables.sh)
+This is the default example at [tpch_variables.sh](https://github.com/RyanWei/TPC-H-HashData/blob/main/tpch_variables.sh)
 
 ```shell
 # environment options
@@ -115,7 +115,7 @@ These are the setup related variables:
 - `ADMIN_USER`: default `gpadmin`.
   It is the default database administrator account, as well as the user accessible to all `mdw` and `sdw1..n` machines.
 
-  Note: The benchmark related files for each segment node are located in the segment's `${PGDATA}/dsbenchmark` directory.
+  Note: The benchmark related files for each segment node are located in the segment's `${PGDATA}/hbenchmark` directory.
   If there isn't enough space in this directory in each segment, you can create a symbolic link to a drive location that does have enough space.
 
 In most cases, we just leave them to the default.
@@ -166,7 +166,7 @@ There are multiple steps running the benchmark and controlled by these variables
 - `RUN_GEN_DATA`: default `true`.
   It will use the `dsdgen` compiled above to generate the flat files for the benchmark.
   The flat files are generated in parallel on all segment nodes.
-  Those files are stored under `${PGDATA}/dsbenchmark` directory.
+  Those files are stored under `${PGDATA}/hbenchmark` directory.
   In the rerun, just set this value to `false`.
 - `RUN_INIT`: default `true`.
   It will setup the GUCs for the Greenplum as well as remember the segment configurations.
@@ -200,7 +200,7 @@ There are multiple steps running the benchmark and controlled by these variables
 
 If any above variable is missing or invalid, the script will abort and show the missing or invalid variable name.
 
-**WARNING**: Now TPC-DS does not rely on the log folder to run or skip the steps. It will only run the steps that are specified explicitly as `true`  in the `tpch_variables.sh`. If any necessary step is speficied as `false` but has never been executed before, the script will abort when it tries to access something that does not exist in the database or under the directory.
+**WARNING**: Now TPC-H does not rely on the log folder to run or skip the steps. It will only run the steps that are specified explicitly as `true`  in the `tpch_variables.sh`. If any necessary step is speficied as `false` but has never been executed before, the script will abort when it tries to access something that does not exist in the database or under the directory.
 
 #### Miscellaneous Options
 
@@ -226,9 +226,9 @@ These are miscellaneous controlling variables:
 
 Table storage is defined in `functions.sh` and is configured for optimal performance.
 `get_version()` function defines different storage options for different scale of the benchmark.
-- `SMALL_STORAGE`: All the dimension tables
-- `MEDIUM_STORAGE`: `catalog_returns` and `store_returns`
-- `LARGE_STORAGE`: `catalog_sales`, `inventory`, `store_sales`, and `web_sales`
+- `SMALL_STORAGE`: `nation` and `region`
+- `MEDIUM_STORAGE`: `customer`, `part`, `partsupp`, and `supplier`
+- `LARGE_STORAGE`: `lineitem` and `orders`
 
 ### Execution
 

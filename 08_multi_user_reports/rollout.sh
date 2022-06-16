@@ -17,7 +17,7 @@ done
 
 filename=$(ls ${PWD}/*.copy.*.sql)
 
-for i in ${TPC_DS_DIR}/log/rollout_testing_*; do
+for i in ${TPC_H_DIR}/log/rollout_testing_*; do
 	logfile="'${i}'"
 	log_time "psql -v ON_ERROR_STOP=1 -a -f ${filename} -v LOGFILE=\"${logfile}\""
 	psql -v ON_ERROR_STOP=1 -a -f ${filename} -v LOGFILE="${logfile}"
