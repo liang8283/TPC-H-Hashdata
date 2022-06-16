@@ -1,7 +1,7 @@
 set role hbench;
 set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1655112420 as a seed to the RNG
+-- using 1655345920 as a seed to the RNG
 
 
 select
@@ -15,7 +15,7 @@ from
 		from
 			customer left outer join orders on
 				c_custkey = o_custkey
-				and o_comment not like '%unusual%packages%'
+				and o_comment not like '%special%requests%'
 		group by
 			c_custkey
 	) as c_orders (c_custkey, c_count)

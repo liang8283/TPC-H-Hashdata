@@ -1,7 +1,7 @@
 set role hbench;
 set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1655112420 as a seed to the RNG
+-- using 1655345920 as a seed to the RNG
 
 
 select
@@ -11,8 +11,8 @@ from
 	part
 where
 	p_partkey = l_partkey
-	and p_brand = 'Brand#43'
-	and p_container = 'MED JAR'
+	and p_brand = 'Brand#11'
+	and p_container = 'SM CAN'
 	and l_quantity < (
 		select
 			0.2 * avg(l_quantity)

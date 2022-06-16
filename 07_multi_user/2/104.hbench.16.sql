@@ -18,9 +18,9 @@ from
 	part
 where
 	p_partkey = ps_partkey
-	and p_brand <> 'Brand#54'
-	and p_type not like 'SMALL ANODIZED%'
-	and p_size in (17, 31, 2, 24, 1, 3, 41, 9)
+	and p_brand <> 'Brand#21'
+	and p_type not like 'PROMO PLATED%'
+	and p_size in (10, 42, 7, 15, 49, 9, 17, 12)
 	and ps_suppkey not in (
 		select
 			s_suppkey

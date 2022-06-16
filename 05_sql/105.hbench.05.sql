@@ -1,7 +1,7 @@
 set role hbench;
 set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1655112420 as a seed to the RNG
+-- using 1655345920 as a seed to the RNG
 
 
 select

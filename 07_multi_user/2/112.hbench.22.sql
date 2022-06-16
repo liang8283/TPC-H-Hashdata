@@ -21,7 +21,7 @@ from
 			customer
 		where
 			substring(c_phone from 1 for 2) in
-				('20', '17', '25', '30', '14', '24', '18')
+				('16', '34', '13', '18', '10', '25', '20')
 			and c_acctbal > (
 				select
 					avg(c_acctbal)
@@ -30,7 +30,7 @@ from
 				where
 					c_acctbal > 0.00
 					and substring(c_phone from 1 for 2) in
-						('20', '17', '25', '30', '14', '24', '18')
+						('16', '34', '13', '18', '10', '25', '20')
 			)
 			and not exists (
 				select

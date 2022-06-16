@@ -25,7 +25,7 @@ where
 	and c_nationkey = s_nationkey
 	and s_nationkey = n_nationkey
 	and n_regionkey = r_regionkey
-	and r_name = 'EUROPE'
+	and r_name = 'AMERICA'
 	and o_orderdate >= date '1997-01-01'
 	and o_orderdate < date '1997-01-01' + interval '1' year
 group by

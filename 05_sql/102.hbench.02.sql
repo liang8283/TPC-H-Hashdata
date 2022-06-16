@@ -1,7 +1,7 @@
 set role hbench;
 set search_path=tpch,public;
 :EXPLAIN_ANALYZE
--- using 1655112420 as a seed to the RNG
+-- using 1655345920 as a seed to the RNG
 
 
 select
@@ -22,8 +22,8 @@ from
 where
 	p_partkey = ps_partkey
 	and s_suppkey = ps_suppkey
-	and p_size = 20
-	and p_type like '%BRASS'
+	and p_size = 12
+	and p_type like '%STEEL'
 	and s_nationkey = n_nationkey
 	and n_regionkey = r_regionkey
 	and r_name = 'EUROPE'
