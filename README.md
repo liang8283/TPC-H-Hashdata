@@ -40,8 +40,8 @@ The original source code is from http://tpc.org/tpc_documents_current_versions/c
 You can get released version from the .tar file:
 
 ```
-curl -LO  https://github.com/hashdata-xyz/TPC-H-HashData/archive/refs/tags/v1.0.tar.gz
-tar xzf v1.0.tar.gz
+curl -LO  https://github.com/hashdata-xyz/TPC-H-HashData/archive/refs/tags/v1.2.tar.gz
+tar xzf v1.2.tar.gz
 mv TPC-H-HashData-1.0 TPC-H-HashData
 ```
 
