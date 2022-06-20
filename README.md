@@ -11,7 +11,7 @@ This repo contains automation of running the DS benchmark on an existing Hashdat
 TPC has published the following TPC-H standards over time:
 | TPC-H Benchmark Version | Published Date | Standard Specification |
 |-|-|-|
-| 3.0.0 (latest) | 2021/06/15 | https://tpc.org/TPC_Documents_Current_Versions/pdf/tpc-h_v3.0.0.pdf|
+| 3.0.0 (latest) | 2021/02/18 | https://tpc.org/TPC_Documents_Current_Versions/pdf/tpc-h_v3.0.0.pdf|
 
 
 ## Setup
@@ -26,7 +26,9 @@ All the following examples are using standard host name convention of HashData u
 
 ### TPC-H Tools Dependencies
 
-Install the dependencies on `mdw` for compiling the `dsdgen` (data generation) and `dsqgen` (query generation).
+Make sure that gcc and make are intalled on `mdw` for compiling the `dbgen` (data generation) and `qgen` (query generation).
+
+You can install the dependencies on `mdw`:
 
 ```bash
 ssh root@mdw
