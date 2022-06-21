@@ -234,10 +234,10 @@ Table storage is defined in `functions.sh` and is configured for optimal perform
 
 ### Execution
 
-Example of running the benchmark as `root` as a background process:
+Example of running the benchmark as `gpadmin` as a background process:
 
 ```bash
-nohup ./tpch.sh > tpch.log 2>&1 < tpch.log &
+nohup sh tpch.sh > tpch.log 2>&1 < tpch.log &
 ```
 
 ### Play with different options
