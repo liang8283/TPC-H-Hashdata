@@ -33,7 +33,7 @@ export RUN_SINGLE_USER_REPORTS="true"
 export RUN_QGEN="true"
 export RUN_MULTI_USER="true"
 export RUN_MULTI_USER_REPORTS="true"
-export RUN_SCORE="true"
+export RUN_SCORE="false"
 
 # misc options
 export SINGLE_USER_ITERATIONS="1"

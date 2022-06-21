@@ -196,9 +196,9 @@ There are multiple steps running the benchmark and controlled by these variables
 - `RUN_MULTI_USER_REPORTS`: default `true`.
   It will upload the results to the Greenplum database `gpadmin` under schema `tpch_reports`.
   Recommend to keep it `true` if above step of `RUN_MULTI_USER` is `true`.
-- `RUN_SCORE`: default `true`.
+- `RUN_SCORE`: default `false`.
   It will query the results from `tpch_reports` and compute the `QphDS` based on supported benchmark standard.
-  Recommend to keep it `true` if you want to see the final score of the run.
+  This function is not supported in the current version as this tool currently only support query tests not refresh functions yet. 
 
 If any above variable is missing or invalid, the script will abort and show the missing or invalid variable name.
 
