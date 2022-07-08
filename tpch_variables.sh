@@ -39,6 +39,8 @@ export RUN_SCORE="false"
 export SINGLE_USER_ITERATIONS="1"
 export EXPLAIN_ANALYZE="false"
 export RANDOM_DISTRIBUTION="false"
+export ORCA_OPTIMIZER="true"
+export STATEMENT_MEM="1GB"
 
 # Set gpfdist location where gpfdist will run p (primary) or m (mirror)
 export GPFDIST_LOCATION="p"
