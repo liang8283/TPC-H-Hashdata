@@ -35,11 +35,16 @@ cd $DATA_DIRECTORY
 # ${PWD}/dbgen -scale ${GEN_DATA_SCALE} -dir ${DATA_DIRECTORY} -parallel ${PARALLEL} -child ${CHILD} -terminate n
 ${DATA_DIRECTORY}/dbgen -s $GEN_DATA_SCALE -C $PARALLEL -S $CHILD -v
 
+if [ "$CHILD" -eq "1" ]; then
+	mv $DATA_DIRECTORY/nation.tbl $DATA_DIRECTORY/nation.tbl.${CHILD}
+	mv $DATA_DIRECTORY/region.tbl $DATA_DIRECTORY/region.tbl.${CHILD}
+fi
+
 if [ "$CHILD" -gt "1" ]; then
 	rm -f $DATA_DIRECTORY/nation.tbl
 	rm -f $DATA_DIRECTORY/region.tbl
-	touch $DATA_DIRECTORY/nation.tbl
-	touch $DATA_DIRECTORY/region.tbl
+	touch $DATA_DIRECTORY/nation.tbl.${CHILD}
+	touch $DATA_DIRECTORY/region.tbl.${CHILD}
 fi
 
 # make sure there is a file in each directory so that gpfdist doesn't throw an error
