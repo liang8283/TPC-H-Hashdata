@@ -28,7 +28,7 @@ for i in $(ls $PWD/*.sql |  xargs -n 1 basename); do
 	filename=${file_id}.${BENCH_ROLE}.${id}.sql
 
 	echo "echo \":EXPLAIN_ANALYZE\" > $PWD/../../05_sql/$filename"
-	printf "set role ${BENCH_ROLE};\nset search_path=$schema_name,public;\n:EXPLAIN_ANALYZE\n" > $PWD/../../05_sql/$filename
+	printf "set role ${BENCH_ROLE};\nset search_path=$schema_name,public;\nset optimizer=${ORCA_OPTIMIZER}\nset statement_mem=${STATEMENT_MEM}\n:EXPLAIN_ANALYZE\n" > $PWD/../../05_sql/$filename
 	echo "./qgen $q >> $PWD/../../05_sql/$filename"
 	$PWD/qgen $q >> $PWD/../../05_sql/$filename
 done
