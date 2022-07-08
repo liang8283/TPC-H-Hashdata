@@ -34,6 +34,14 @@ cd ${PWD}
 cd $DATA_DIRECTORY
 # ${PWD}/dbgen -scale ${GEN_DATA_SCALE} -dir ${DATA_DIRECTORY} -parallel ${PARALLEL} -child ${CHILD} -terminate n
 ${DATA_DIRECTORY}/dbgen -s $GEN_DATA_SCALE -C $PARALLEL -S $CHILD -v
+
+if [ "$CHILD" -gt "1" ]; then
+	rm -f $DATA_DIRECTORY/nation.tbl
+	rm -f $DATA_DIRECTORY/region.tbl
+	touch $DATA_DIRECTORY/nation.tbl
+	touch $DATA_DIRECTORY/region.tbl
+fi
+
 # make sure there is a file in each directory so that gpfdist doesn't throw an error
 cd ${PWD}
 declare -a tables=("supplier" "region" "part" "partsupp" "customer" "orders" "nation" "lineitem")
