@@ -60,7 +60,8 @@ Put the folder under /home/gpadmin/ and change owner to gpadmin.
 chown -R gpadmin.gpadmin TPC-H-HashData
 ```
 
-## Usage
+
+### Execution
 
 To run the benchmark, login as `gpadmin` on `mdw:
 
@@ -68,6 +69,12 @@ To run the benchmark, login as `gpadmin` on `mdw:
 ssh gpadmin@mdw
 cd ~/TPC-H-HashData
 ./tpch.sh
+```
+
+Or running the benchmark as a background process:
+
+```bash
+sh run.sh
 ```
 
 By default, it will run a scale 1 (1G) and with 2 concurrent users, from data generation to score computation.
@@ -213,6 +220,8 @@ If any above variable is missing or invalid, the script will abort and show the 
 EXPLAIN_ANALYZE="false"
 RANDOM_DISTRIBUTION="false"
 SINGLE_USER_ITERATIONS="1"
+ORCA_OPTIMIZER="true"
+STATEMENT_MEM="1GB"
 ```
 
 These are miscellaneous controlling variables:
@@ -225,8 +234,10 @@ These are miscellaneous controlling variables:
   This controls how many times the power test will run.
   During the final score computation, the minimal/fastest query elapsed time of multiple runs will be used.
   This can be used to ensure the power test is in a `warm` run environment.
+- `ORCA_OPTIMIZER`: default `true` or `on` which controls if to use the ORCA as optimizer. Set to `false` or `off` to use the QP optimizer.
+- `STATEMENT_MEM`: default 1GB which set the `statement_mem` parameter for each statement. Set with `GB` or `MB`.
 
-### Storage Options
+#### Storage Options
 
 Table storage is defined in `functions.sh` and is configured for optimal performance.
 `get_version()` function defines different storage options for different scale of the benchmark.
@@ -234,15 +245,7 @@ Table storage is defined in `functions.sh` and is configured for optimal perform
 - `MEDIUM_STORAGE`: `customer`, `part`, `partsupp`, and `supplier`
 - `LARGE_STORAGE`: `lineitem` and `orders`
 
-### Execution
-
-Example of running the benchmark as a background process:
-
-```bash
-sh run.sh
-```
-
-### Play with different options
+#### Play with different options
 - Change different storage options in `functions.sh` to try with different compress options and whether use AO/CO storage.
 - Replace some of the tables' DDL with the `*.sql.partition` files in folder `03_ddl` to use partition for some of the non-dimension tables. No partition is used by default.
 - Steps `RUN_COMPILE_tpch` and `RUN_GEN_DATA` only need to be executed once. 
