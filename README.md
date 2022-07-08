@@ -42,9 +42,9 @@ The original source code is from http://tpc.org/tpc_documents_current_versions/c
 You can get released version from the .tar file:
 
 ```
-curl -LO  https://github.com/hashdata-xyz/TPC-H-HashData/archive/refs/tags/v1.2.tar.gz
-tar xzf v1.2.tar.gz
-mv TPC-H-HashData-1.0 TPC-H-HashData
+curl -LO  https://github.com/hashdata-xyz/TPC-H-HashData/archive/refs/tags/v1.4.tar.gz
+tar xzf v1.4.tar.gz
+mv TPC-H-HashData-1.4 TPC-H-HashData
 ```
 
 OR get the current version by downloading with git:
