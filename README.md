@@ -109,6 +109,9 @@ RUN_SCORE="true"
 SINGLE_USER_ITERATIONS="1"
 EXPLAIN_ANALYZE="false"
 RANDOM_DISTRIBUTION="false"
+ORCA_OPTIMIZER="true"
+STATEMENT_MEM="2GB"
+STATEMENT_MEM_MULTI_USER='1GB'
 ```
 
 `tpch.sh` will validate existence of those variables.
@@ -221,7 +224,8 @@ EXPLAIN_ANALYZE="false"
 RANDOM_DISTRIBUTION="false"
 SINGLE_USER_ITERATIONS="1"
 ORCA_OPTIMIZER="true"
-STATEMENT_MEM="1GB"
+STATEMENT_MEM="2GB"
+STATEMENT_MEM_MULTI_USER='1GB'
 ```
 
 These are miscellaneous controlling variables:
@@ -235,7 +239,8 @@ These are miscellaneous controlling variables:
   During the final score computation, the minimal/fastest query elapsed time of multiple runs will be used.
   This can be used to ensure the power test is in a `warm` run environment.
 - `ORCA_OPTIMIZER`: default `true` or `on` which controls if to use the ORCA as optimizer. Set to `false` or `off` to use the QP optimizer.
-- `STATEMENT_MEM`: default 1GB which set the `statement_mem` parameter for each statement. Set with `GB` or `MB`.
+- `STATEMENT_MEM`: default 2GB which set the `statement_mem` parameter for each statement of single user test. Set with `GB` or `MB`. STATEMENT_MEM should be less than gp_vmem_protect_limit.
+- `STATEMENT_MEM_MULTI_USER`: default 1GB which set the `statement_mem` parameter for each statement of multiple user test. Set with `GB` or `MB`. Please note that, STATEMENT_MEM_MULTI_USER * MULTI_USER_COUNT should be less than gp_vmem_protect_limit.
 
 #### Storage Options
 
