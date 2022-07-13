@@ -12,9 +12,10 @@ filter="gpdb"
 if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
   #Create tables
   for i in $(ls ${PWD}/*.${filter}.*.sql); do
-    id=$(echo ${i} | awk -F '.' '{print $1}')
-    schema_name=$(echo ${i} | awk -F '.' '{print $2}')
-    table_name=$(echo ${i} | awk -F '.' '{print $3}')
+    file_name=$(echo ${i} | awk -F '/' '{print $NF}')
+    id=$(echo ${file_name} | awk -F '.' '{print $1}')
+    schema_name=$(echo ${file_name} | awk -F '.' '{print $2}')
+    table_name=$(echo ${file_name} | awk -F '.' '{print $3}')
     start_log
 
     if [ "${RANDOM_DISTRIBUTION}" == "true" ]; then
@@ -22,6 +23,8 @@ if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
     else
       for z in $(cat ${PWD}/distribution.txt); do
         table_name2=$(echo ${z} | awk -F '|' '{print $2}')
+        echo ${table_name}
+        echo ${table_name2}
         if [ "${table_name2}" == "${table_name}" ]; then
           distribution=$(echo ${z} | awk -F '|' '{print $3}')
         fi
@@ -41,9 +44,10 @@ if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
   for i in $(ls ${PWD}/*.ext_tpch.*.sql); do
     start_log
 
-    id=$(echo ${i} | awk -F '.' '{print $1}')
-    schema_name=$(echo ${i} | awk -F '.' '{print $2}')
-    table_name=$(echo ${i} | awk -F '.' '{print $3}')
+    file_name=$(echo ${i} | awk -F '/' '{print $NF}')
+    id=$(echo ${file_name} | awk -F '.' '{print $1}')
+    schema_name=$(echo ${file_name} | awk -F '.' '{print $2}')
+    table_name=$(echo ${file_name} | awk -F '.' '{print $3}')
 
     counter=0
 
