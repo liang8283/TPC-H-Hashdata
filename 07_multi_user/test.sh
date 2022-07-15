@@ -37,8 +37,19 @@ function generate_queries()
 		filename=${query_id}.${BENCH_ROLE}.${query_number}.sql
 		#add explain analyze 
 		echo "print \"set role ${BENCH_ROLE};\\n:EXPLAIN_ANALYZE\\n\" > ${sql_dir}/${filename}"
-		printf "set role ${BENCH_ROLE};\nset search_path=$schema_name,public;\nset optimizer=${ORCA_OPTIMIZER};\nset statement_mem=\"${STATEMENT_MEM_MULTI_USER}\";\n:EXPLAIN_ANALYZE\n" > ${sql_dir}/${filename}
 
+		printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\n" > ${sql_dir}/${filename}
+
+		for o in $(cat ${TPC_H_DIR}/01_gen_data/optimizer.txt); do
+        	q2=$(echo ${o} | awk -F '|' '{print $1}')
+       	 	if [ "${order}" == "${q2}" ]; then
+          		optimizer=$(echo ${o} | awk -F '|' '{print $2}')
+        	fi
+    	done
+		printf "set optimizer=${optimizer};\n" >> ${sql_dir}/${filename}
+		printf "set statement_mem=\"${STATEMENT_MEM_MULTI_USER}\";\n" >> ${sql_dir}/${filename}
+		printf ":EXPLAIN_ANALYZE\n" >> ${sql_dir}/${filename}
+		
 		echo "sed -n \"$start_position\",\"$end_position\"p $sql_dir/$tpch_query_name >> $sql_dir/$filename"
 		sed -n "$start_position","$end_position"p $sql_dir/$tpch_query_name >> $sql_dir/$filename
 		echo "Completed: ${sql_dir}/${filename}"
