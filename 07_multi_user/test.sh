@@ -67,7 +67,7 @@ for i in ${sql_dir}/*.sql; do
 	schema_name=${session_id}
 	table_name=$(basename ${i} | awk -F '.' '{print $3}')
 
-	if [ "${EXPLAIN_ANALYZE}" == "false" ]; then
+	if [ "${EXPLAIN_ANALYZE}" == "false" -o "${table_name}" == "15"]; then
 		log_time "psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f ${i} | wc -l"
 		tuples=$(psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f ${i} | wc -l; exit ${PIPESTATUS[0]})
 		tuples=$((tuples - 1))
