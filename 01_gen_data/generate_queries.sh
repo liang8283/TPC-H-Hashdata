@@ -29,7 +29,6 @@ for i in $(ls $PWD/*.sql |  xargs -n 1 basename); do
 
 	echo "echo \":EXPLAIN_ANALYZE\" > $PWD/../../05_sql/$filename"
 
-	#printf "set role ${BENCH_ROLE};\nset search_path=$schema_name,public;\nset optimizer=${ORCA_OPTIMIZER};\nset statement_mem=\"${STATEMENT_MEM}\";\n:EXPLAIN_ANALYZE\n" > $PWD/../../05_sql/$filename
 	printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\n" > ${TPC_H_DIR}/05_sql/${filename}
 
 	for o in $(cat ${TPC_H_DIR}/01_gen_data/optimizer.txt); do
