@@ -1,6 +1,7 @@
 # environment options
 export ADMIN_USER="gpadmin"
 export BENCH_ROLE="hbench"
+export SCHEMA_NAME="tpch"
 
 # benchmark options
 export GEN_DATA_SCALE="1"
