@@ -7,7 +7,6 @@ source_bashrc
 set -e
 
 query_id=1
-schema_name="tpch"
 
 if [ "${GEN_DATA_SCALE}" == "" ] || [ "${BENCH_ROLE}" == "" ]; then
 	echo "Usage: generate_queries.sh scale rolename"
