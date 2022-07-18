@@ -223,7 +223,6 @@ If any above variable is missing or invalid, the script will abort and show the 
 EXPLAIN_ANALYZE="false"
 RANDOM_DISTRIBUTION="false"
 SINGLE_USER_ITERATIONS="1"
-ORCA_OPTIMIZER="true"
 STATEMENT_MEM="2GB"
 STATEMENT_MEM_MULTI_USER='1GB'
 ```
@@ -250,10 +249,13 @@ Table storage is defined in `functions.sh` and is configured for optimal perform
 - `MEDIUM_STORAGE`: `customer`, `part`, `partsupp`, and `supplier`
 - `LARGE_STORAGE`: `lineitem` and `orders`
 
+Table distribution keys are defined in `../03_ddl/distribution.txt`, you can modify tables' distribution keys by changing this file.
+
 #### Play with different options
 - Change different storage options in `functions.sh` to try with different compress options and whether use AO/CO storage.
 - Replace some of the tables' DDL with the `*.sql.partition` files in folder `03_ddl` to use partition for some of the non-dimension tables. No partition is used by default.
 - Steps `RUN_COMPILE_tpch` and `RUN_GEN_DATA` only need to be executed once. 
+- ORCA optimizer can be adjusted by changing the file `../TPC-H-Hashdata/01_gen_data/optimizer.txt`. You can turn ORCA `on` or `off` for all 22 queries by changing appropriate row of this file.
 
 
 ## Benchmark Minor Modifications

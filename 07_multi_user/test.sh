@@ -12,8 +12,6 @@ init_log ${step}
 
 sql_dir=${PWD}/${session_id}
 
-schema_name=tpch
-
 function generate_queries()
 {
 	#going from 1 base to 0 base
