@@ -10,10 +10,10 @@ rm -f ${TPC_H_DIR}/log/*single.explain_analyze.log
 for i in ${PWD}/*.${BENCH_ROLE}.*.sql; do
 	for x in $(seq 1 ${SINGLE_USER_ITERATIONS}); do
 		id=$(echo ${i} | awk -F '.' '{print $1}')
-		schema_name=$(echo ${i} | awk -F '.' '{print $2}')
-		table_name=$(echo ${i} | awk -F '.' '{print $3}')
+		role_name=$(echo ${i} | awk -F '.' '{print $2}')
+		sql_id=$(echo ${i} | awk -F '.' '{print $3}')
 		start_log
-		if [ "${EXPLAIN_ANALYZE}" == "false" ]; then
+		if [ "${EXPLAIN_ANALYZE}" == "false" || "${sql_id}" == 15 ]; then
 			log_time "psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE=\"\" -f ${i} | wc -l"
 			tuples=$(psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f ${i} | wc -l; exit ${PIPESTATUS[0]})
 		else
