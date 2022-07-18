@@ -65,7 +65,8 @@ for i in ${sql_dir}/*.sql; do
 	start_log
 	id=${i}
 	schema_name=${session_id}
-	table_name=$(basename ${i} | awk -F '.' '{print $3}')
+	table_name=$(echo ${i} | awk -F '.' '{print $3}')
+	#table_name= $(basename ${i} | awk -F '.' '{print $3}')
 
 	if [ "${EXPLAIN_ANALYZE}" == "false" -o "${table_name}" == "15"]; then
 		log_time "psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f ${i} | wc -l"
