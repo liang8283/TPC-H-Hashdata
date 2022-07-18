@@ -13,7 +13,7 @@ for i in ${PWD}/*.${BENCH_ROLE}.*.sql; do
 		role_name=$(echo ${i} | awk -F '.' '{print $2}')
 		sql_id=$(echo ${i} | awk -F '.' '{print $3}')
 		start_log
-		if [ "${EXPLAIN_ANALYZE}" == "false" || "${sql_id}" == 15 ]; then
+		if [ "${EXPLAIN_ANALYZE}" == "false" || "${sql_id}" == "15" ]; then
 			log_time "psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE=\"\" -f ${i} | wc -l"
 			tuples=$(psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f ${i} | wc -l; exit ${PIPESTATUS[0]})
 		else
