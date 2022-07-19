@@ -32,7 +32,7 @@ for i in $(ls $PWD/*.sql |  xargs -n 1 basename); do
 
 	for o in $(cat ${TPC_H_DIR}/01_gen_data/optimizer.txt); do
         q2=$(echo ${o} | awk -F '|' '{print $1}')
-        if [ "${q}" == "${q2}" ]; then
+        if [ "${id}" == "${q2}" ]; then
           optimizer=$(echo ${o} | awk -F '|' '{print $2}')
         fi
     done
