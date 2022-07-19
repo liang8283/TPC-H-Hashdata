@@ -237,7 +237,6 @@ These are miscellaneous controlling variables:
   This controls how many times the power test will run.
   During the final score computation, the minimal/fastest query elapsed time of multiple runs will be used.
   This can be used to ensure the power test is in a `warm` run environment.
-- `ORCA_OPTIMIZER`: default `true` or `on` which controls if to use the ORCA as optimizer. Set to `false` or `off` to use the QP optimizer.
 - `STATEMENT_MEM`: default 2GB which set the `statement_mem` parameter for each statement of single user test. Set with `GB` or `MB`. STATEMENT_MEM should be less than gp_vmem_protect_limit.
 - `STATEMENT_MEM_MULTI_USER`: default 1GB which set the `statement_mem` parameter for each statement of multiple user test. Set with `GB` or `MB`. Please note that, `STATEMENT_MEM_MULTI_USER` * `MULTI_USER_COUNT` should be less than `gp_vmem_protect_limit`.
 
