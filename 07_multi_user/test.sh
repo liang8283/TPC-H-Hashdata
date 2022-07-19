@@ -66,6 +66,7 @@ for i in ${sql_dir}/*.sql; do
 	id=${i}
 	schema_name=${session_id}
 	table_name=$(echo ${i} | awk -F '.' '{print $3}')
+	echo $table_name
 	#table_name= $(basename ${i} | awk -F '.' '{print $3}')
 
 	if [ "${EXPLAIN_ANALYZE}" == "false" -o "${table_name}" == "15"]; then
