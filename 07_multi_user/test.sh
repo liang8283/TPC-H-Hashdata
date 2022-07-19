@@ -77,7 +77,7 @@ for i in ${sql_dir}/*.sql; do
 		myfilename=$(basename ${i})
 		mylogfile="${TPC_H_DIR}/log/${session_id}.${myfilename}.multi.explain_analyze.log"
 		log_time "psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE=\"EXPLAIN ANALYZE\" -f ${i}"
-		psql -v ON_ERROR_STOP=1 -A -q -t -P -e pager=off -v EXPLAIN_ANALYZE="EXPLAIN ANALYZE" -f ${i} > ${mylogfile}
+		psql -v ON_ERROR_STOP=1 -A -e -q -t -P pager=off -v EXPLAIN_ANALYZE="EXPLAIN ANALYZE" -f ${i} > ${mylogfile}
 		tuples="0"
 	fi
 		
