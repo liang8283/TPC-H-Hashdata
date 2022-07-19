@@ -40,7 +40,7 @@ function generate_queries()
 
 		for o in $(cat ${TPC_H_DIR}/01_gen_data/optimizer.txt); do
         	q2=$(echo ${o} | awk -F '|' '{print $1}')
-       	 	if [ "${order}" == "${q2}" ]; then
+       	 	if [ "${query_number}" == "${q2}" ]; then
           		optimizer=$(echo ${o} | awk -F '|' '{print $2}')
         	fi
     	done
