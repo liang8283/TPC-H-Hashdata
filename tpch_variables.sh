@@ -1,6 +1,7 @@
 # environment options
 export ADMIN_USER="gpadmin"
 export BENCH_ROLE="hbench"
+export SCHEMA_NAME="tpch"
 
 # benchmark options
 export GEN_DATA_SCALE="1"
@@ -39,7 +40,6 @@ export RUN_SCORE="true"
 export SINGLE_USER_ITERATIONS="1"
 export EXPLAIN_ANALYZE="false"
 export RANDOM_DISTRIBUTION="false"
-export ORCA_OPTIMIZER="true"
 export STATEMENT_MEM="2GB"
 export STATEMENT_MEM_MULTI_USER="1GB"
 
