@@ -40,8 +40,8 @@ for i in $(ls $PWD/*.sql |  xargs -n 1 basename); do
 	printf "set statement_mem=\"${STATEMENT_MEM}\";\n" >> ${TPC_H_DIR}/05_sql/${filename}
 	printf ":EXPLAIN_ANALYZE\n" >> ${TPC_H_DIR}/05_sql/${filename}
 
-	echo "./qgen $q >> $PWD/../../05_sql/$filename"
-	$PWD/qgen $q >> $PWD/../../05_sql/$filename
+	echo "./qgen -d -s ${GEN_DATA_SCALE} $q >> $PWD/../../05_sql/$filename"
+	$PWD/qgen -d -s ${GEN_DATA_SCALE} $q >> $PWD/../../05_sql/$filename
 done
 
 cd ..
