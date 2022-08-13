@@ -53,8 +53,8 @@ function generate_templates()
 	
 	for i in $(seq 1 $MULTI_USER_COUNT); do
 		echo "rm -f $CurrentPath/*.sql"
-		echo "./qgen -p $i -c -v > $CurrentPath/query_$i.sql"
-		${PWD}/qgen -p $i -c -v > $CurrentPath/query_$i.sql
+		echo "./qgen -d -s ${GEN_DATA_SCALE} -p $i -c -v > $CurrentPath/query_$i.sql"
+		${PWD}/qgen -d -s ${GEN_DATA_SCALE} -p $i -c -v > $CurrentPath/query_$i.sql
 	done
 	
 	cd ..

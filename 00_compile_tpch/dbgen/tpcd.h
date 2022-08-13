@@ -113,9 +113,9 @@
 #endif
 
 #ifdef HASHDATA
-#define GEN_QUERY_PLAN ""
-#define START_TRAN ""
-#define END_TRAN ""
+#define GEN_QUERY_PLAN "EXPLAIN"
+#define START_TRAN "BEGIN;"
+#define END_TRAN "END;"
 #define SET_OUTPUT ""
 #define SET_ROWCOUNT "LIMIT %d;\n"
 #define SET_DBASE ""

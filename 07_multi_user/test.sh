@@ -12,8 +12,6 @@ init_log ${step}
 
 sql_dir=${PWD}/${session_id}
 
-schema_name=tpch
-
 function generate_queries()
 {
 	#going from 1 base to 0 base
@@ -37,8 +35,19 @@ function generate_queries()
 		filename=${query_id}.${BENCH_ROLE}.${query_number}.sql
 		#add explain analyze 
 		echo "print \"set role ${BENCH_ROLE};\\n:EXPLAIN_ANALYZE\\n\" > ${sql_dir}/${filename}"
-		printf "set role ${BENCH_ROLE};\nset search_path=$schema_name,public;\nset optimizer=${ORCA_OPTIMIZER};\nset statement_mem=\"${STATEMENT_MEM_MULTI_USER}\";\n:EXPLAIN_ANALYZE\n" > ${sql_dir}/${filename}
 
+		printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\n" > ${sql_dir}/${filename}
+
+		for o in $(cat ${TPC_H_DIR}/01_gen_data/optimizer.txt); do
+        	q2=$(echo ${o} | awk -F '|' '{print $1}')
+       	 	if [ "${query_number}" == "${q2}" ]; then
+          		optimizer=$(echo ${o} | awk -F '|' '{print $2}')
+        	fi
+    	done
+		printf "set optimizer=${optimizer};\n" >> ${sql_dir}/${filename}
+		printf "set statement_mem=\"${STATEMENT_MEM_MULTI_USER}\";\n" >> ${sql_dir}/${filename}
+		printf ":EXPLAIN_ANALYZE\n" >> ${sql_dir}/${filename}
+		
 		echo "sed -n \"$start_position\",\"$end_position\"p $sql_dir/$tpch_query_name >> $sql_dir/$filename"
 		sed -n "$start_position","$end_position"p $sql_dir/$tpch_query_name >> $sql_dir/$filename
 		echo "Completed: ${sql_dir}/${filename}"
@@ -56,17 +65,19 @@ for i in ${sql_dir}/*.sql; do
 	start_log
 	id=${i}
 	schema_name=${session_id}
-	table_name=$(basename ${i} | awk -F '.' '{print $3}')
+	table_name=$(echo ${i} | awk -F '.' '{print $3}')
+	echo $table_name
+	#table_name= $(basename ${i} | awk -F '.' '{print $3}')
 
-	if [ "${EXPLAIN_ANALYZE}" == "false" ]; then
+	if [ "${EXPLAIN_ANALYZE}" == "false" -o "${table_name}" == "15" ]; then
 		log_time "psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f ${i} | wc -l"
 		tuples=$(psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f ${i} | wc -l; exit ${PIPESTATUS[0]})
 		tuples=$((tuples - 1))
 	else
 		myfilename=$(basename ${i})
 		mylogfile="${TPC_H_DIR}/log/${session_id}.${myfilename}.multi.explain_analyze.log"
-		log_time "psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE=\"EXPLAIN ANALYZE\" -f ${i}"
-		psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="EXPLAIN ANALYZE" -f ${i} > ${mylogfile}
+		log_time "psql -v ON_ERROR_STOP=1 -A -e -q -t -P pager=off -v EXPLAIN_ANALYZE=\"EXPLAIN ANALYZE\" -f ${i}"
+		psql -v ON_ERROR_STOP=1 -A -e -q -t -P pager=off -v EXPLAIN_ANALYZE="EXPLAIN ANALYZE" -f ${i} > ${mylogfile}
 		tuples="0"
 	fi
 		

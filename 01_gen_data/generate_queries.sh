@@ -7,7 +7,6 @@ source_bashrc
 set -e
 
 query_id=1
-schema_name="tpch"
 
 if [ "${GEN_DATA_SCALE}" == "" ] || [ "${BENCH_ROLE}" == "" ]; then
 	echo "Usage: generate_queries.sh scale rolename"
@@ -28,9 +27,21 @@ for i in $(ls $PWD/*.sql |  xargs -n 1 basename); do
 	filename=${file_id}.${BENCH_ROLE}.${id}.sql
 
 	echo "echo \":EXPLAIN_ANALYZE\" > $PWD/../../05_sql/$filename"
-	printf "set role ${BENCH_ROLE};\nset search_path=$schema_name,public;\nset optimizer=${ORCA_OPTIMIZER};\nset statement_mem=\"${STATEMENT_MEM}\";\n:EXPLAIN_ANALYZE\n" > $PWD/../../05_sql/$filename
-	echo "./qgen $q >> $PWD/../../05_sql/$filename"
-	$PWD/qgen $q >> $PWD/../../05_sql/$filename
+
+	printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\n" > ${TPC_H_DIR}/05_sql/${filename}
+
+	for o in $(cat ${TPC_H_DIR}/01_gen_data/optimizer.txt); do
+        q2=$(echo ${o} | awk -F '|' '{print $1}')
+        if [ "${id}" == "${q2}" ]; then
+          optimizer=$(echo ${o} | awk -F '|' '{print $2}')
+        fi
+    done
+	printf "set optimizer=${optimizer};\n" >> ${TPC_H_DIR}/05_sql/${filename}
+	printf "set statement_mem=\"${STATEMENT_MEM}\";\n" >> ${TPC_H_DIR}/05_sql/${filename}
+	printf ":EXPLAIN_ANALYZE\n" >> ${TPC_H_DIR}/05_sql/${filename}
+
+	echo "./qgen -d -s ${GEN_DATA_SCALE} $q >> $PWD/../../05_sql/$filename"
+	$PWD/qgen -d -s ${GEN_DATA_SCALE} $q >> $PWD/../../05_sql/$filename
 done
 
 cd ..
