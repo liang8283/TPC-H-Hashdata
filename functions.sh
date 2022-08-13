@@ -97,7 +97,7 @@ function source_bashrc() {
       echo "${HOME}/.bashrc does not contain greenplum_path.sh"
       echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
       exit 1
-  elif [ ${count} -gt 1 ] || [ ${count2} -gt 1]; then
+  elif [ ${count} -gt 1 ] || [ ${count2} -gt 1 ]; then
       echo "${HOME}/.bashrc contains multiple greenplum_path.sh entries"
       echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
       exit 1
