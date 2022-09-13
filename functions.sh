@@ -94,11 +94,11 @@ function source_bashrc() {
   count=$(egrep -c "source .*/greenplum_path.sh|\. .*/greenplum_path.sh" ${HOME}/.bashrc || true)
   count2=$(egrep -c "source .*/greenplum_path.sh|\. .*/greenplum_path.sh" ${HOME}/.bash_profile || true)
   if [ ${count} -eq 0 ] && [ ${count2} -eq 0 ]; then
-      echo "${HOME}/.bashrc does not contain greenplum_path.sh"
+      echo "${HOME}/.bashrc and ${HOME}/.bash_profile does not contain greenplum_path.sh"
       echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
       exit 1
   elif [ ${count} -gt 1 ] || [ ${count2} -gt 1 ]; then
-      echo "${HOME}/.bashrc contains multiple greenplum_path.sh entries"
+      echo "${HOME}/.bashrc or ${HOME}/.bash_profile contains multiple greenplum_path.sh entries"
       echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
       exit 1
   else
